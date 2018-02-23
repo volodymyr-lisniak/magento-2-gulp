@@ -15,7 +15,9 @@ import {
     LIVE_KEY,
     MAP_KEY,
     MIN_KEY,
+    BS_KEY,
     EXECUTION_FILE,
+    WATCH_FILES,
     CSS_FOLDER,
     PUB_STATIC,
     EXEC_COMMAND
@@ -30,7 +32,8 @@ if (
     !themeName ||
     themeName === MAP_KEY ||
     themeName === MIN_KEY ||
-    themeName === LIVE_KEY
+    themeName === LIVE_KEY ||
+    themeName === BS_KEY
 ) {
     for (let i in themesConfig) {
         let lessFiles = [];
@@ -47,7 +50,8 @@ if (
 
         sources[i] = {
             css: `${lessPath}/${CSS_FOLDER}`,
-            less: lessFiles
+            less: lessFiles,
+            watch: `${lessPath}/${WATCH_FILES}`
         };
 
         execPaths = [
@@ -81,7 +85,8 @@ if (
 
     sources[themeName] = {
         css: `${lessPath}/${CSS_FOLDER}`,
-        less: lessFiles
+        less: lessFiles,
+        watch: `${lessPath}/${WATCH_FILES}`
     };
 
     execPaths = [

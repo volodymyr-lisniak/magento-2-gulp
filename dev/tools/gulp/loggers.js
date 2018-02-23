@@ -46,7 +46,7 @@ export const help = () => {
     console.log(
         color('\nAWS Magento 2 Gulp', 'GREEN'),
         color('version', 'WHITE'),
-        color('0.8.0\n\n', 'YELLOW'),
+        color('0.9.0\n\n', 'YELLOW'),
         color('Usage:\n', 'YELLOW'),
         color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
         color('Avaliable commands:\n', 'YELLOW'),
@@ -58,8 +58,8 @@ export const help = () => {
         color('Flush Magento cache\n', 'WHITE'),
         color('  watch               ', 'GREEN'),
         color('Watch for theme files\n', 'WHITE'),
-        color('  clean-styles        ', 'GREEN'),
-        color('Remove *.css and *.map.css files\n\n', 'WHITE'),
+        color('  clean               ', 'GREEN'),
+        color('Remove cached files (pub/static, var/)\n\n', 'WHITE'),
         color('Options:\n', 'YELLOW'),
         color('  --[package]         ', 'GREEN'),
         color(
@@ -71,6 +71,8 @@ export const help = () => {
         color('  --map               ', 'GREEN'),
         color('Add maping to CSS files\n', 'WHITE'),
         color('  --live              ', 'GREEN'),
-        color('Enable livereload\n', 'WHITE')
+        color('Enable livereload\n', 'WHITE'),
+        color('  --bs                ', 'GREEN'),
+        color('Enable browsersync\n', 'WHITE')
     );
 };

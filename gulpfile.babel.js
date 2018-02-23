@@ -19,4 +19,5 @@ gulp.task('cache-flush', tasks.cacheFlush);
 gulp.task('deploy', tasks.deploy);
 gulp.task('clean', tasks.clean);
 gulp.task('less', tasks.less);
+gulp.task('watch', tasks.watch);
 gulp.task('default', tasks.default);

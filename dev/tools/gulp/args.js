@@ -8,7 +8,7 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import { LIVE_KEY, MAP_KEY, MIN_KEY } from './constants';
+import { LIVE_KEY, MAP_KEY, MIN_KEY, BS_KEY } from './constants';
 
 const devArguments = (argList => {
     let args = [];
@@ -38,3 +38,4 @@ export let themeName = devArguments[0];
 export let sourceMapArg = devArguments.indexOf(MAP_KEY);
 export let minCssArg = devArguments.indexOf(MIN_KEY);
 export let liveArg = devArguments.indexOf(LIVE_KEY);
+export let bsArg = devArguments.indexOf(BS_KEY);

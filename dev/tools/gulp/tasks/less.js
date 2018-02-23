@@ -9,12 +9,14 @@
  */
 
 import gulp from 'gulp';
+import livereload from 'gulp-livereload';
 import gulpLoadPlugins from 'gulp-load-plugins';
-let plugins = gulpLoadPlugins();
+const plugins = gulpLoadPlugins();
+const browserSync = require('browser-sync').create();
 
 import * as loggers from '../loggers';
 import { matchTheme, avaliablePackages } from '../matchTheme';
-import { themeName, sourceMapArg, minCssArg, liveArg } from '../args';
+import { themeName, sourceMapArg, minCssArg, liveArg, bsArg } from '../args';
 import { sources } from '../paths';
 
 module.exports = () => {
@@ -26,7 +28,7 @@ module.exports = () => {
         loggers.task(task, Object.keys(sources));
 
         for (let source in sources) {
-            gulp
+            return gulp
                 .src(sources[source].less)
                 .pipe(plugins.if(sourceMapArg >= 0, plugins.sourcemaps.init()))
                 .pipe(
@@ -38,7 +40,9 @@ module.exports = () => {
                 .pipe(
                     plugins.if(sourceMapArg >= 0, plugins.sourcemaps.write(''))
                 )
-                .pipe(gulp.dest(sources[source].css));
+                .pipe(gulp.dest(sources[source].css))
+                .pipe(plugins.if(liveArg >= 0, plugins.livereload()))
+                .pipe(plugins.if(bsArg >= 0, browserSync.stream()));
         }
     }
 };
