@@ -8,14 +8,14 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import gulp from 'gulp';
-import * as child_process from 'child_process';
+const gulp = require('gulp');
+const child_process = require('child_process');
 
-import { EXECUTION_FILE, CACHE_FLUSH_COMMAND } from '../constants';
+const constants = require('../constants');
 
 module.exports = cb => {
     child_process.exec(
-        `${EXECUTION_FILE} ${CACHE_FLUSH_COMMAND}`,
+        `${constants.EXECUTION_FILE} ${constants.CACHE_FLUSH_COMMAND}`,
 
         (err, stdout, stderr) => {
             console.log(stdout);

@@ -8,9 +8,9 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import gulp from 'gulp';
+const gulp = require('gulp');
 
-import * as loggers from '../loggers';
+const loggers = require('../loggers');
 
 module.exports = () => {
     loggers.help();

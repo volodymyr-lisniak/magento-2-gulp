@@ -8,23 +8,23 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import gulp from 'gulp';
-import exec from 'exec-queue';
+const gulp = require('gulp');
+const exec = require('exec-queue');
 
-import { themeName } from '../args';
-import * as loggers from '../loggers';
-import { matchTheme, avaliablePackages } from '../matchTheme';
-import { execPaths } from '../paths';
+const args = require('../args');
+const paths = require('../paths');
+const loggers = require('../loggers');
+const matchTheme = require('../matchTheme');
 
 module.exports = () => {
-    if (!matchTheme) {
-        loggers.matchTheme(themeName, avaliablePackages);
+    if (!matchTheme.matchTheme) {
+        loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
         let task = 'exec';
 
-        loggers.task(task, execPaths);
+        loggers.task(task, paths.execPaths);
 
-        execPaths.forEach(execOptions => {
+        paths.execPaths.forEach(execOptions => {
             exec(`${execOptions}`, (err, stdout, stderr) => {
                 console.log(stdout);
                 console.log(stderr);

@@ -8,36 +8,26 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import { themeName } from './args';
-import themesConfig from '../grunt/configs/themes';
-import { changeMatchTheme, packages } from './matchTheme';
-import {
-    LIVE_KEY,
-    MAP_KEY,
-    MIN_KEY,
-    BS_KEY,
-    EXECUTION_FILE,
-    WATCH_FILES,
-    CSS_FOLDER,
-    PUB_STATIC,
-    EXEC_COMMAND
-} from './constants';
+const args = require('./args');
+const themesConfig = require('../grunt/configs/themes');
+const matchTheme = require('./matchTheme');
+const constants = require('./constants');
 
-export let execPaths = [];
-export let deployPaths = [];
-export let cleanPaths = [];
-export let sources = {};
+let execPaths = [];
+let deployPaths = [];
+let cleanPaths = [];
+let sources = {};
 
 if (
-    !themeName ||
-    themeName === MAP_KEY ||
-    themeName === MIN_KEY ||
-    themeName === LIVE_KEY ||
-    themeName === BS_KEY
+    !args.themeName ||
+    args.themeName === constants.MAP_KEY ||
+    args.themeName === constants.MIN_KEY ||
+    args.themeName === constants.LIVE_KEY ||
+    args.themeName === constants.BS_KEY
 ) {
     for (let i in themesConfig) {
         let lessFiles = [];
-        let lessPath = `${PUB_STATIC}/${themesConfig[i].area}/${
+        let lessPath = `${constants.PUB_STATIC}/${themesConfig[i].area}/${
             themesConfig[i].name
         }/${themesConfig[i].locale}`;
 
@@ -49,14 +39,14 @@ if (
         }
 
         sources[i] = {
-            css: `${lessPath}/${CSS_FOLDER}`,
+            css: `${lessPath}/${constants.CSS_FOLDER}`,
             less: lessFiles,
-            watch: `${lessPath}/${WATCH_FILES}`
+            watch: `${lessPath}/${constants.WATCH_FILES}`
         };
 
         execPaths = [
             ...execPaths,
-            `${EXECUTION_FILE} ${EXEC_COMMAND} --locale="${
+            `${constants.EXECUTION_FILE} ${constants.EXEC_COMMAND} --locale="${
                 themesConfig[i].locale
             }" --area="${themesConfig[i].area}" --theme="${
                 themesConfig[i].name
@@ -65,45 +55,56 @@ if (
 
         cleanPaths = [
             ...cleanPaths,
-            `${PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/`
+            `${constants.PUB_STATIC}/${themesConfig[i].area}/${
+                themesConfig[i].name
+            }/`
         ];
     }
-} else if (packages.indexOf(themeName) > -1) {
+} else if (matchTheme.packages.indexOf(args.themeName) > -1) {
     let lessFiles = [];
-    let lessPath = `${PUB_STATIC}/${themesConfig[themeName].area}/${
-        themesConfig[themeName].name
-    }/${themesConfig[themeName].locale}`;
+    let lessPath = `${constants.PUB_STATIC}/${
+        themesConfig[args.themeName].area
+    }/${themesConfig[args.themeName].name}/${
+        themesConfig[args.themeName].locale
+    }`;
 
-    for (let j in themesConfig[themeName].files) {
+    for (let j in themesConfig[args.themeName].files) {
         lessFiles = [
             ...lessFiles,
-            `${lessPath}/${themesConfig[themeName].files[j]}.${
-                themesConfig[themeName].dsl
+            `${lessPath}/${themesConfig[args.themeName].files[j]}.${
+                themesConfig[args.themeName].dsl
             }`
         ];
     }
 
-    sources[themeName] = {
-        css: `${lessPath}/${CSS_FOLDER}`,
+    sources[args.themeName] = {
+        css: `${lessPath}/${constants.CSS_FOLDER}`,
         less: lessFiles,
-        watch: `${lessPath}/${WATCH_FILES}`
+        watch: `${lessPath}/${constants.WATCH_FILES}`
     };
 
     execPaths = [
         ...execPaths,
-        `${EXECUTION_FILE} ${EXEC_COMMAND} --locale="${
-            themesConfig[themeName].locale
-        }" --area="${themesConfig[themeName].area}" --theme="${
-            themesConfig[themeName].name
-        }" ${themesConfig[themeName].files.join(' ')}`
+        `${constants.EXECUTION_FILE} ${constants.EXEC_COMMAND} --locale="${
+            themesConfig[args.themeName].locale
+        }" --area="${themesConfig[args.themeName].area}" --theme="${
+            themesConfig[args.themeName].name
+        }" ${themesConfig[args.themeName].files.join(' ')}`
     ];
 
     cleanPaths = [
         ...cleanPaths,
-        `${PUB_STATIC}/${themesConfig[themeName].area}/${
-            themesConfig[themeName].name
+        `${constants.PUB_STATIC}/${themesConfig[args.themeName].area}/${
+            themesConfig[args.themeName].name
         }/`
     ];
 } else {
-    changeMatchTheme(false);
+    matchTheme.matchTheme = false;
 }
+
+module.exports = {
+    execPaths: execPaths,
+    deployPaths: deployPaths,
+    cleanPaths: cleanPaths,
+    sources: sources
+};

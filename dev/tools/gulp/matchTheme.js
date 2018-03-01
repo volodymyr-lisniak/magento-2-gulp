@@ -8,12 +8,12 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-// import themesConfig from './theme';
-import themesConfig from '../grunt/configs/themes';
+const themesConfig = require('../grunt/configs/themes');
 
-export const packages = Object.keys(themesConfig);
-export const avaliablePackages = packages.join(', ');
-export let matchTheme = true;
-export let changeMatchTheme = newValue => {
-    matchTheme = newValue;
+const packages = Object.keys(themesConfig);
+
+module.exports = {
+    packages: packages,
+    avaliablePackages: packages.join(', '),
+    matchTheme: true
 };

@@ -8,26 +8,26 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import gulp from 'gulp';
-import del from 'del';
+const gulp = require('gulp');
+const del = require('del');
 
-import { cleanPaths } from '../paths';
-import { themeName } from '../args';
-import * as loggers from '../loggers';
-import { CACHED_FILES } from '../constants';
-import { matchTheme, avaliablePackages } from '../matchTheme';
+const args = require('../args');
+const paths = require('../paths');
+const loggers = require('../loggers');
+const constants = require('../constants');
+const matchTheme = require('../matchTheme');
 
 module.exports = cb => {
-    if (!matchTheme) {
-        loggers.matchTheme(themeName, avaliablePackages);
+    if (!matchTheme.matchTheme) {
+        loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
         let task = 'clean';
 
-        loggers.task(task, cleanPaths);
+        loggers.task(task, paths.cleanPaths);
 
-        del(CACHED_FILES);
+        del(constants.CACHED_FILES);
 
-        cleanPaths.forEach(cleanOptions => {
+        paths.cleanPaths.forEach(cleanOptions => {
             del([`${cleanOptions}`]);
         });
     }

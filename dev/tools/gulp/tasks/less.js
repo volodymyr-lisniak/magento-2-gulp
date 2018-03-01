@@ -8,41 +8,47 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import gulp from 'gulp';
-import livereload from 'gulp-livereload';
-import gulpLoadPlugins from 'gulp-load-plugins';
-const plugins = gulpLoadPlugins();
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins')();
 const browserSync = require('browser-sync').create();
 
-import * as loggers from '../loggers';
-import { matchTheme, avaliablePackages } from '../matchTheme';
-import { themeName, sourceMapArg, minCssArg, liveArg, bsArg } from '../args';
-import { sources } from '../paths';
+const args = require('../args');
+const paths = require('../paths');
+const loggers = require('../loggers');
+const matchTheme = require('../matchTheme');
 
 module.exports = () => {
-    if (!matchTheme) {
-        loggers.matchTheme(themeName, avaliablePackages);
+    if (!matchTheme.matchTheme) {
+        loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
         let task = 'LESS compilation';
 
-        loggers.task(task, Object.keys(sources));
+        loggers.task(task, Object.keys(paths.sources));
 
-        for (let source in sources) {
+        Object.keys(paths.sources).forEach(source => {
             return gulp
-                .src(sources[source].less)
-                .pipe(plugins.if(sourceMapArg >= 0, plugins.sourcemaps.init()))
+                .src(paths.sources[source].less)
+                .pipe(
+                    plugins.if(
+                        args.sourceMapArg >= 0,
+                        plugins.sourcemaps.init()
+                    )
+                )
                 .pipe(
                     plugins.less().on('error', err => {
                         console.log(err);
                     })
                 )
-                .pipe(plugins.if(minCssArg >= 0, plugins.cssmin()))
+                .pipe(plugins.if(args.minCssArg >= 0, plugins.cssmin()))
                 .pipe(
-                    plugins.if(sourceMapArg >= 0, plugins.sourcemaps.write(''))
+                    plugins.if(
+                        args.sourceMapArg >= 0,
+                        plugins.sourcemaps.write('')
+                    )
                 )
-                .pipe(gulp.dest(sources[source].css))
-                .pipe(plugins.if(liveArg >= 0, plugins.livereload()))
-                .pipe(plugins.if(bsArg >= 0, browserSync.stream()));
-        }
+                .pipe(gulp.dest(paths.sources[source].css))
+                .pipe(plugins.if(args.liveArg >= 0, plugins.livereload()))
+                .pipe(plugins.if(args.bsArg >= 0, browserSync.stream()));
+        });
     }
 };

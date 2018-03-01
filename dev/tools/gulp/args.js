@@ -8,7 +8,7 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-import { LIVE_KEY, MAP_KEY, MIN_KEY, BS_KEY } from './constants';
+const constants = require('./constants');
 
 const devArguments = (argList => {
     let args = [];
@@ -28,14 +28,10 @@ const devArguments = (argList => {
     return args;
 })(process.argv);
 
-export let changeMinCssArg = newValue => {
-    minCssArg = newValue;
+module.exports = {
+    themeName: devArguments[0],
+    sourceMapArg: devArguments.indexOf(constants.MAP_KEY),
+    minCssArg: devArguments.indexOf(constants.MIN_KEY),
+    liveArg: devArguments.indexOf(constants.LIVE_KEY),
+    bsArg: devArguments.indexOf(constants.BS_KEY)
 };
-export let changeSourceMapArg = newValue => {
-    sourceMapArg = newValue;
-};
-export let themeName = devArguments[0];
-export let sourceMapArg = devArguments.indexOf(MAP_KEY);
-export let minCssArg = devArguments.indexOf(MIN_KEY);
-export let liveArg = devArguments.indexOf(LIVE_KEY);
-export let bsArg = devArguments.indexOf(BS_KEY);
