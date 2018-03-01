@@ -1,0 +1,23 @@
+{
+    "name": "absolutewebservices/magento-2.x-gulp",
+    "type": "aws-mapping",
+    "description": "Magento 2 gulp configuration",
+    "homepage": "https://bitbucket.org/absolutewebservices/magento-1.x-gulp",
+    "authors": [
+        {
+            "name": "Aws Team"
+        }
+    ],
+    "require": {
+        "absolutewebservices/copy-plugin": "*"
+    },
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "aws-mapping": {
+            "dev/tools/gulp": "dev/tools/gulp",
+            "gulpfile.js": "gulpfile.js",
+            "package.json.sample-aws": "package.json.sample-aws"
+        }
+    }
+}
