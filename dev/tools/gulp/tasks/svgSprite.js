@@ -7,15 +7,15 @@
  * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
-"use strict";
 
 const gulp = require("gulp");
-const args = require("../args");
 const del = require("del");
+const runSequence = require("run-sequence");
+
+const args = require("../args");
 const paths = require("../paths");
 const loggers = require("../loggers");
 const matchTheme = require("../matchTheme");
-const runSequence = require("run-sequence");
 
 module.exports = cb => {
     if (!matchTheme.matchTheme) {

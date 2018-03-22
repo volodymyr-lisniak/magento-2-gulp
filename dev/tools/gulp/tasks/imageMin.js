@@ -8,15 +8,15 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
- const gulp = require("gulp");
- const imagemin = require("gulp-imagemin");
- const args = require("../args");
- const paths = require("../paths");
- const loggers = require("../loggers");
- const matchTheme = require("../matchTheme");
- const imageminJpegRecompress = require("imagemin-jpeg-recompress");
+const gulp = require("gulp");
+const imagemin = require("gulp-imagemin");
 
- module.exports = cb => {
+const args = require("../args");
+const paths = require("../paths");
+const loggers = require("../loggers");
+const matchTheme = require("../matchTheme");
+
+module.exports = cb => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
@@ -26,15 +26,15 @@
 
         Object.keys(paths.sources).forEach(source => {
             return gulp
-            .src(paths.sources[source].imagesSrc)
-            .pipe(
-                imagemin({
-                    interlaced: true,
-                    progressive: true,
-                    optimizationLevel: 5
-                })
+                .src(paths.sources[source].imagesSrc)
+                .pipe(
+                    imagemin({
+                        interlaced: true,
+                        progressive: true,
+                        optimizationLevel: 5
+                    })
                 )
-            .pipe(gulp.dest(paths.sources[source].imagesDest));
+                .pipe(gulp.dest(paths.sources[source].imagesDest));
         });
     }
 };
