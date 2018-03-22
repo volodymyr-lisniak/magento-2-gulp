@@ -8,15 +8,15 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const gulp = require("gulp");
-const imagemin = require("gulp-imagemin");
-const args = require("../args");
-const paths = require("../paths");
-const loggers = require("../loggers");
-const matchTheme = require("../matchTheme");
-const imageminMozjpeg = require('imagemin-mozjpeg'); 
+ const gulp = require("gulp");
+ const imagemin = require("gulp-imagemin");
+ const args = require("../args");
+ const paths = require("../paths");
+ const loggers = require("../loggers");
+ const matchTheme = require("../matchTheme");
+ const imageminJpegRecompress = require("imagemin-jpeg-recompress");
 
-module.exports = cb => {
+ module.exports = cb => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
@@ -26,18 +26,15 @@ module.exports = cb => {
 
         Object.keys(paths.sources).forEach(source => {
             return gulp
-                .src(paths.sources[source].imagesSrc)
-                .pipe(
-                    imagemin(
-                        [
-                            imageminMozjpeg({quality: 10, progressive: true, tune: "ms-ssim", smooth: 2})
-                        ],
-                        {
-                            verbose: true
-                        }
-                    )
+            .src(paths.sources[source].imagesSrc)
+            .pipe(
+                imagemin({
+                    interlaced: true,
+                    progressive: true,
+                    optimizationLevel: 5
+                })
                 )
-                .pipe(gulp.dest(paths.sources[source].imagesDest), {overwrite: true});
+            .pipe(gulp.dest(paths.sources[source].imagesDest));
         });
     }
 };
