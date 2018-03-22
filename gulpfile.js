@@ -20,3 +20,6 @@ gulp.task('less', tasks.less);
 gulp.task('watch', tasks.watch);
 gulp.task('help', tasks.help);
 gulp.task('default', tasks.default);
+gulp.task('svg-sprite-creating', tasks.svgSpriteCreating);
+gulp.task('svg-sprite-creating-cleaning', tasks.svgSprite);
+gulp.task('image-min', tasks.imageMin);

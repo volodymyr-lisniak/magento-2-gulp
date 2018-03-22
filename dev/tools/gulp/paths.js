@@ -8,10 +8,10 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const args = require('./args');
-const themesConfig = require('../grunt/configs/themes');
-const matchTheme = require('./matchTheme');
-const constants = require('./constants');
+const args = require("./args");
+const themesConfig = require("../grunt/configs/themes");
+const matchTheme = require("./matchTheme");
+const constants = require("./constants");
 
 let execPaths = [];
 let deployPaths = [];
@@ -27,9 +27,14 @@ if (
 ) {
     for (let i in themesConfig) {
         let lessFiles = [];
+
         let lessPath = `${constants.PUB_STATIC}/${themesConfig[i].area}/${
             themesConfig[i].name
         }/${themesConfig[i].locale}`;
+
+        let imgFiles = `${constants.THEME_FOLDER}/${themesConfig[i].area}/${
+            themesConfig[i].name
+        }`;
 
         for (let j in themesConfig[i].files) {
             lessFiles = [
@@ -41,7 +46,14 @@ if (
         sources[i] = {
             css: `${lessPath}/${constants.CSS_FOLDER}`,
             less: lessFiles,
-            watch: `${lessPath}/${constants.WATCH_FILES}`
+            watch: `${lessPath}/${constants.WATCH_FILES}`,
+            imagesSrc: `${imgFiles}/${constants.IMAGE_FOLDER_SRC}`,
+            imagesDest: `${imgFiles}/${constants.IMAGE_FOLDER_DEST}`,
+            imagesSvg: `${imgFiles}/${constants.IMAGE_SVG_FOLDER}`,
+            imagesSvgSrc: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_SRC}`,
+            imagesSvgDest: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_DEST}`,
+            svgStyleFile: `${imgFiles}/${constants.IMAGE_SVG_STYLE_FILE}`,
+            svgSpriteFolder: `${imgFiles}/${constants.IMAGE_SVG_SPRITE_FOLDER}`
         };
 
         execPaths = [
@@ -50,7 +62,7 @@ if (
                 themesConfig[i].locale
             }" --area="${themesConfig[i].area}" --theme="${
                 themesConfig[i].name
-            }" ${themesConfig[i].files.join(' ')}`
+            }" ${themesConfig[i].files.join(" ")}`
         ];
 
         cleanPaths = [
@@ -62,11 +74,16 @@ if (
     }
 } else if (matchTheme.packages.indexOf(args.themeName) > -1) {
     let lessFiles = [];
+
     let lessPath = `${constants.PUB_STATIC}/${
         themesConfig[args.themeName].area
     }/${themesConfig[args.themeName].name}/${
         themesConfig[args.themeName].locale
     }`;
+
+    let imgFiles = `${constants.THEME_FOLDER}/${
+        themesConfig[args.themeName].area
+    }/${themesConfig[args.themeName].name}`;
 
     for (let j in themesConfig[args.themeName].files) {
         lessFiles = [
@@ -80,7 +97,14 @@ if (
     sources[args.themeName] = {
         css: `${lessPath}/${constants.CSS_FOLDER}`,
         less: lessFiles,
-        watch: `${lessPath}/${constants.WATCH_FILES}`
+        watch: `${lessPath}/${constants.WATCH_FILES}`,
+        imagesSrc: `${imgFiles}/${constants.IMAGE_FOLDER_SRC}`,
+        imagesDest: `${imgFiles}/${constants.IMAGE_FOLDER_DEST}`,
+        imagesSvg: `${imgFiles}/${constants.IMAGE_SVG_FOLDER}`,
+        imagesSvgSrc: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_SRC}`,
+        imagesSvgDest: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_DEST}`,
+        svgStyleFile: `${imgFiles}/${constants.IMAGE_SVG_STYLE_FILE}`,
+        svgSpriteFolder: `${imgFiles}/${constants.IMAGE_SVG_SPRITE_FOLDER}`
     };
 
     execPaths = [
@@ -89,7 +113,7 @@ if (
             themesConfig[args.themeName].locale
         }" --area="${themesConfig[args.themeName].area}" --theme="${
             themesConfig[args.themeName].name
-        }" ${themesConfig[args.themeName].files.join(' ')}`
+        }" ${themesConfig[args.themeName].files.join(" ")}`
     ];
 
     cleanPaths = [

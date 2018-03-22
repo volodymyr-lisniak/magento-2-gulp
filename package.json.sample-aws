@@ -1,24 +1,46 @@
 {
     "name": "magento-2-gulp",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "private": true,
     "author": "Absolute Web Services",
-    "description": "Magento 1 node modules dependencies",
+    "description": "Magento 2 node modules dependencies",
     "license": "Unlicense",
     "devDependencies": {
         "browser-sync": "^2.23.6",
         "del": "^3.0.0",
+        "eslint": "^4.17.0",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-promise": "^3.7.0",
+        "eslint-plugin-standard": "^3.0.1",
         "exec-queue": "0.0.2",
         "gulp": "^3.9.1",
+        "gulp-cache": "^1.0.2",
+        "gulp-changed": "^3.2.0",
         "gulp-clean": "^0.4.0",
         "gulp-color": "0.0.1",
         "gulp-cssmin": "^0.2.0",
         "gulp-if": "^2.0.2",
+        "gulp-imagemin": "^2.3.0",
         "gulp-less": "^3.5.0",
         "gulp-livereload": "^3.8.1",
         "gulp-load-plugins": "^1.5.0",
         "gulp-sourcemaps": "^2.6.3",
+        "gulp-svg-sprite": "^1.4.0",
+        "gulp-svgmin": "^1.2.4",
+        "lint-staged": "^6.1.0",
         "require-dir": "^0.3.2",
-        "run-sequence": "^2.2.1"
+        "run-sequence": "^2.2.1",
+        "stylelint": "^9.1.2",
+        "stylelint-order": "^0.8.1"
+    },
+    "scripts": {
+        "lint": "lint-staged",
+        "precommit": "npm run lint"
+    },
+    "lint-staged": {
+        "*": [
+            "bash ./lint/precommit-hook",
+            "git add"
+        ]
     }
 }

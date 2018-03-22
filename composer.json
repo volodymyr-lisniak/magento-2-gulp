@@ -9,15 +9,18 @@
         }
     ],
     "require": {
-        "absolutewebservices/copy-plugin": "*"
+        "absolutewebservices/copy-plugin": "~1.1.0",
+        "absolutewebservices/pre-commit-custom": "~0.0.1"
     },
     "minimum-stability": "dev",
-    "require": {},
     "extra": {
         "aws-mapping": {
             "dev/tools/gulp": "dev/tools/gulp",
+            "lint/precommit-hook": "lint/precommit-hook",
             "gulpfile.js": "gulpfile.js",
-            "package.json.sample-aws": "package.json.sample-aws"
+            "package.json.sample-aws": "package.json.sample-aws",
+            ".stylelint": ".stylelint",
+            ".eslintrc": ".eslintrc"
         }
     }
 }
