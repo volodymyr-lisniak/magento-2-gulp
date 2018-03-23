@@ -19,7 +19,7 @@
             "lint/precommit-hook": "lint/precommit-hook",
             "gulpfile.js": "gulpfile.js",
             "package.json.sample-aws": "package.json.sample-aws",
-            ".stylelint": ".stylelint",
+            ".stylelintrc": ".stylelintrc",
             ".eslintrc": ".eslintrc"
         }
     }
