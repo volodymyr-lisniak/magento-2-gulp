@@ -42,5 +42,8 @@
             "bash ./lint/precommit-hook",
             "git add"
         ]
+    },
+    "dependencies": {
+        "imagemin-mozjpeg": "^7.0.0"
     }
 }
