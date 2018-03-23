@@ -21,7 +21,7 @@ module.exports = cb => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
-        let task = "cleaning with creating svg sprite files";
+        let task = "cleaning svg sprite files";
 
         loggers.task(task, Object.keys(paths.sources));
 
@@ -36,7 +36,7 @@ module.exports = cb => {
             ]);
 
             if (itemsProcessed === array.length) {
-                runSequence("svg-sprite-creating", cb);
+                runSequence("svg-create", cb);
             }
         });
     }

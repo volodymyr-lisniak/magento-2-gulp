@@ -10,6 +10,7 @@
 
 const gulp = require("gulp");
 const imagemin = require("gulp-imagemin");
+const imageminMozjpeg = require("imagemin-mozjpeg");
 
 const args = require("../args");
 const paths = require("../paths");
@@ -28,11 +29,11 @@ module.exports = cb => {
             return gulp
                 .src(paths.sources[source].imagesSrc)
                 .pipe(
-                    imagemin({
-                        interlaced: true,
-                        progressive: true,
-                        optimizationLevel: 5
-                    })
+                    imagemin([
+                        imageminMozjpeg({
+                            quality: 50
+                        })
+                    ])
                 )
                 .pipe(gulp.dest(paths.sources[source].imagesDest));
         });
