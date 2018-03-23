@@ -55,7 +55,7 @@ module.exports = {
         console.log(
             color('\nAWS Magento 2 Gulp', 'GREEN'),
             color('version', 'WHITE'),
-            color('1.1.2\n\n', 'YELLOW'),
+            color('1.1.3\n\n', 'YELLOW'),
             color('Usage:\n', 'YELLOW'),
             color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
             color('Avaliable commands:\n', 'YELLOW'),
