@@ -9,8 +9,7 @@
  */
 
 const gulp = require("gulp");
-const imagemin = require("gulp-imagemin");
-const imageminMozjpeg = require("imagemin-mozjpeg");
+const image = require('gulp-image');
 
 const args = require("../args");
 const paths = require("../paths");
@@ -26,14 +25,21 @@ module.exports = cb => {
         loggers.task(task, Object.keys(paths.sources));
 
         Object.keys(paths.sources).forEach(source => {
-            return gulp
+            gulp
                 .src(paths.sources[source].imagesSrc)
                 .pipe(
-                    imagemin([
-                        imageminMozjpeg({
-                            quality: 50
-                        })
-                    ])
+                    image({
+                        pngquant: true,
+                        optipng: false,
+                        zopflipng: true,
+                        jpegRecompress: false,
+                        mozjpeg: true,
+                        guetzli: false,
+                        gifsicle: true,
+                        svgo: true,
+                        concurrent: 10,
+                        quiet: true 
+                    })
                 )
                 .pipe(gulp.dest(paths.sources[source].imagesDest));
         });
