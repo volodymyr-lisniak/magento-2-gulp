@@ -41,7 +41,7 @@ module.exports = {
 
     task: (task, source) => {
         console.log(
-            color(`Running gulp task`, 'WHITE'),
+            color('Running gulp task', 'WHITE'),
             color(`${task}`, 'CYAN'),
             color(`for ${source.length} theme(s):`, 'WHITE')
         );
@@ -79,10 +79,7 @@ module.exports = {
             color('Create SVG sprite\n\n', 'WHITE'),
             color('Options:\n', 'YELLOW'),
             color('  --[package]                    ', 'GREEN'),
-            color(
-                'Package name (optional field). Need to be the first option. Ex.: --luma\n',
-                'WHITE'
-            ),
+            color('Package name (optional field). Need to be the first option. Ex.: --luma\n', 'WHITE'),
             color('  --min                          ', 'GREEN'),
             color('Minify css files\n', 'WHITE'),
             color('  --map                          ', 'GREEN'),

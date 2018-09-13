@@ -32,20 +32,15 @@ if (
         if ({}.hasOwnProperty.call(themesConfig, i)) {
             let lessFiles = [];
 
-            let lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${
-                themesConfig[i].name
-            }/${themesConfig[i].locale}`;
-
-            let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${
-                themesConfig[i].name
+            let lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/${
+                themesConfig[i].locale
             }`;
+
+            let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}`;
 
             for (let j in themesConfig[i].files) {
                 if ({}.hasOwnProperty.call(themesConfig[i].files, j)) {
-                    lessFiles = [
-                        ...lessFiles,
-                        `${lessPath}/${themesConfig[i].files[j]}.${themesConfig[i].dsl}`
-                    ];
+                    lessFiles = [...lessFiles, `${lessPath}/${themesConfig[i].files[j]}.${themesConfig[i].dsl}`];
                 }
             }
 
@@ -62,43 +57,30 @@ if (
 
             execPaths = [
                 ...execPaths,
-                `${commands.EXECUTION_FILE} ${commands.EXEC_COMMAND} --locale='${
-                    themesConfig[i].locale
-                }' --area='${themesConfig[i].area}' --theme='${
-                    themesConfig[i].name
-                }' ${themesConfig[i].files.join(' ')}`
+                `${commands.EXECUTION_FILE} ${commands.EXEC_COMMAND} --locale='${themesConfig[i].locale}' --area='${
+                    themesConfig[i].area
+                }' --theme='${themesConfig[i].name}' ${themesConfig[i].files.join(' ')}`
             ];
 
-            cleanPaths = [
-                ...cleanPaths,
-                `${folders.PUB_STATIC}/${themesConfig[i].area}/${
-                    themesConfig[i].name
-                }/`
-            ];
+            cleanPaths = [...cleanPaths, `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/`];
         }
     }
     /* eslint-enable max-depth */
 } else if (matchTheme.packages.indexOf(args.themeName) > -1) {
     let lessFiles = [];
 
-    let lessPath = `${folders.PUB_STATIC}/${
-        themesConfig[args.themeName].area
-    }/${themesConfig[args.themeName].name}/${
+    let lessPath = `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${
         themesConfig[args.themeName].locale
     }`;
 
-    let imgFiles = `${folders.THEME_FOLDER}/${
-        themesConfig[args.themeName].area
-    }/${themesConfig[args.themeName].name}`;
+    let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}`;
 
     /* eslint-disable max-depth */
     for (let j in themesConfig[args.themeName].files) {
         if ({}.hasOwnProperty.call(themesConfig[args.themeName].files, j)) {
             lessFiles = [
                 ...lessFiles,
-                `${lessPath}/${themesConfig[args.themeName].files[j]}.${
-                    themesConfig[args.themeName].dsl
-                }`
+                `${lessPath}/${themesConfig[args.themeName].files[j]}.${themesConfig[args.themeName].dsl}`
             ];
         }
     }
@@ -119,16 +101,14 @@ if (
         ...execPaths,
         `${commands.EXECUTION_FILE} ${commands.EXEC_COMMAND} --locale='${
             themesConfig[args.themeName].locale
-        }' --area='${themesConfig[args.themeName].area}' --theme='${
-            themesConfig[args.themeName].name
-        }' ${themesConfig[args.themeName].files.join(' ')}`
+        }' --area='${themesConfig[args.themeName].area}' --theme='${themesConfig[args.themeName].name}' ${themesConfig[
+            args.themeName
+        ].files.join(' ')}`
     ];
 
     cleanPaths = [
         ...cleanPaths,
-        `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${
-            themesConfig[args.themeName].name
-        }/`
+        `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/`
     ];
 } else {
     matchTheme.matchTheme = false;

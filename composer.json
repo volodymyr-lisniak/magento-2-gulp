@@ -5,7 +5,7 @@
     "homepage": "https://bitbucket.org/absolutewebservices/magento-1.x-gulp",
     "authors": [
         {
-            "name": "Aws Team"
+            "name": "AWS Team"
         }
     ],
     "require": {
@@ -21,7 +21,8 @@
             "gulpfile.js": "gulpfile.js",
             "package.json.sample-aws": "package.json.sample-aws",
             ".stylelintrc": ".stylelintrc",
-            ".eslintrc": ".eslintrc"
+            ".eslintrc": ".eslintrc",
+            ".babelrc": ".babelrc"
         }
     }
 }

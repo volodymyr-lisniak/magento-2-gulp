@@ -27,9 +27,11 @@ module.exports = () => {
 
         return gulp
             .src(folders.JS_FOLDER_SRC)
-            .pipe(plugins.rename((path) => {
-                path.dirname = `${path.dirname}/${folders.JS_FOLDER_DIST}`;
-            }))
+            .pipe(
+                plugins.rename(path => {
+                    path.dirname = `${path.dirname}/${folders.JS_FOLDER_DIST}`;
+                })
+            )
             .pipe(plugins.babel())
             .pipe(gulp.dest(folders.JS_FOLDER_BASEDIR));
     }

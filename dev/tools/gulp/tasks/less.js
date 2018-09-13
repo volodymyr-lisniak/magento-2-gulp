@@ -28,24 +28,14 @@ module.exports = () => {
         Object.keys(paths.sources).forEach(source => {
             return gulp
                 .src(paths.sources[source].less)
-                .pipe(
-                    plugins.if(
-                        args.sourceMapArg >= 0,
-                        plugins.sourcemaps.init()
-                    )
-                )
+                .pipe(plugins.if(args.sourceMapArg >= 0, plugins.sourcemaps.init()))
                 .pipe(
                     plugins.less().on('error', err => {
                         console.log(err);
                     })
                 )
                 .pipe(plugins.if(args.minCssArg >= 0, plugins.cssmin()))
-                .pipe(
-                    plugins.if(
-                        args.sourceMapArg >= 0,
-                        plugins.sourcemaps.write('')
-                    )
-                )
+                .pipe(plugins.if(args.sourceMapArg >= 0, plugins.sourcemaps.write('')))
                 .pipe(gulp.dest(paths.sources[source].css))
                 .pipe(plugins.if(args.liveArg >= 0, plugins.livereload()))
                 .pipe(plugins.if(args.bsArg >= 0, browserSync.stream()));
