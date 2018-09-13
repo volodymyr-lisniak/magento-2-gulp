@@ -11,7 +11,7 @@
 const args = require('./args');
 const themesConfig = require('../grunt/configs/themes');
 const matchTheme = require('./matchTheme');
-const arguments = require('./constants/arguments');
+const devArgs = require('./constants/devArgs');
 const commands = require('./constants/commands');
 const folders = require('./constants/folders');
 
@@ -22,10 +22,10 @@ let sources = {};
 
 if (
     !args.themeName ||
-    args.themeName === arguments.MAP_KEY ||
-    args.themeName === arguments.MIN_KEY ||
-    args.themeName === arguments.LIVE_KEY ||
-    args.themeName === arguments.BS_KEY
+    args.themeName === devArgs.MAP_KEY ||
+    args.themeName === devArgs.MIN_KEY ||
+    args.themeName === devArgs.LIVE_KEY ||
+    args.themeName === devArgs.BS_KEY
 ) {
     /* eslint-disable max-depth */
     for (let i in themesConfig) {

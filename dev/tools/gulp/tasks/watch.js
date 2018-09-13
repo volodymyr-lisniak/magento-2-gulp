@@ -15,7 +15,7 @@ const browserSync = require('browser-sync').create();
 const args = require('../args');
 const paths = require('../paths');
 const loggers = require('../loggers');
-const arguments = require('../constants/arguments');
+const devArgs = require('../constants/devArgs');
 const bsConfig = require('../constants/bsConfig');
 const matchTheme = require('../matchTheme');
 
@@ -24,10 +24,10 @@ module.exports = () => {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else if (
         !args.themeName ||
-        args.themeName === arguments.MAP_KEY ||
-        args.themeName === arguments.MIN_KEY ||
-        args.themeName === arguments.LIVE_KEY ||
-        args.themeName === arguments.BS_KEY
+        args.themeName === devArgs.MAP_KEY ||
+        args.themeName === devArgs.MIN_KEY ||
+        args.themeName === devArgs.LIVE_KEY ||
+        args.themeName === devArgs.BS_KEY
     ) {
         loggers.specifyTheme(matchTheme.avaliablePackages);
     } else {
