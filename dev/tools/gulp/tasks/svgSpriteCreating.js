@@ -8,21 +8,21 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const gulp = require("gulp");
-const svgmin = require("gulp-svgmin");
-const svgSprite = require("gulp-svg-sprite");
+const gulp = require('gulp');
+const svgSprite = require('gulp-svg-sprite');
+const plugins = require('gulp-load-plugins')();
 
-const args = require("../args");
-const paths = require("../paths");
-const loggers = require("../loggers");
-const matchTheme = require("../matchTheme");
-const constants = require("../constants");
+const args = require('../args');
+const paths = require('../paths');
+const loggers = require('../loggers');
+const matchTheme = require('../matchTheme');
+const folders = require('../constants/folders');
 
-module.exports = cb => {
+module.exports = () => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
-        let task = "creating svg sprite";
+        let task = 'Creating svg sprite';
 
         loggers.task(task, Object.keys(paths.sources));
 
@@ -30,7 +30,7 @@ module.exports = cb => {
             return gulp
                 .src(paths.sources[source].imagesSvgSrc)
                 .pipe(
-                    svgmin({
+                    plugins.svgmin({
                         js2svg: {
                             pretty: true
                         }
@@ -41,13 +41,13 @@ module.exports = cb => {
                         dest: paths.sources[source].imagesSvg,
                         mode: {
                             view: {
-                                common: "svg-icon",
-                                prefix: ".aws-svg-icon-",
-                                sprite: constants.IMAGE_SVG_SPRITE_FOLDER_DEST,
+                                common: 'svg-icon',
+                                prefix: '.aws-svg-icon-',
+                                sprite: folders.IMAGE_SVG_SPRITE_FOLDER_DEST,
                                 render: {
                                     less: {
                                         dest:
-                                            constants.IMAGE_SVG_STYLES_FOLDER_DEST
+                                            folders.IMAGE_SVG_STYLES_FOLDER_DEST
                                     }
                                 }
                             }

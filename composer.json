@@ -14,6 +14,7 @@
     },
     "minimum-stability": "dev",
     "extra": {
+        "aws-mapping-strategy": "force",
         "aws-mapping": {
             "dev/tools/gulp": "dev/tools/gulp",
             "lint/precommit-hook": "lint/precommit-hook",

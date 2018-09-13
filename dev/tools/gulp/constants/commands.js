@@ -8,8 +8,8 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const runSequence = require('run-sequence');
-
-module.exports = cb => {
-    runSequence('help', cb);
+module.exports = {
+    EXECUTION_FILE: 'php bin/magento',
+    EXEC_COMMAND: 'dev:source-theme:deploy',
+    CACHE_FLUSH_COMMAND: 'cache:flush'
 };

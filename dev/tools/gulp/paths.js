@@ -8,10 +8,12 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const args = require("./args");
-const themesConfig = require("../grunt/configs/themes");
-const matchTheme = require("./matchTheme");
-const constants = require("./constants");
+const args = require('./args');
+const themesConfig = require('../grunt/configs/themes');
+const matchTheme = require('./matchTheme');
+const arguments = require('./constants/arguments');
+const commands = require('./constants/commands');
+const folders = require('./constants/folders');
 
 let execPaths = [];
 let deployPaths = [];
@@ -20,105 +22,111 @@ let sources = {};
 
 if (
     !args.themeName ||
-    args.themeName === constants.MAP_KEY ||
-    args.themeName === constants.MIN_KEY ||
-    args.themeName === constants.LIVE_KEY ||
-    args.themeName === constants.BS_KEY
+    args.themeName === arguments.MAP_KEY ||
+    args.themeName === arguments.MIN_KEY ||
+    args.themeName === arguments.LIVE_KEY ||
+    args.themeName === arguments.BS_KEY
 ) {
+    /* eslint-disable max-depth */
     for (let i in themesConfig) {
-        let lessFiles = [];
+        if ({}.hasOwnProperty.call(themesConfig, i)) {
+            let lessFiles = [];
 
-        let lessPath = `${constants.PUB_STATIC}/${themesConfig[i].area}/${
-            themesConfig[i].name
-        }/${themesConfig[i].locale}`;
+            let lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${
+                themesConfig[i].name
+            }/${themesConfig[i].locale}`;
 
-        let imgFiles = `${constants.THEME_FOLDER}/${themesConfig[i].area}/${
-            themesConfig[i].name
-        }`;
+            let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${
+                themesConfig[i].name
+            }`;
 
-        for (let j in themesConfig[i].files) {
-            lessFiles = [
-                ...lessFiles,
-                `${lessPath}/${themesConfig[i].files[j]}.${themesConfig[i].dsl}`
+            for (let j in themesConfig[i].files) {
+                if ({}.hasOwnProperty.call(themesConfig[i].files, j)) {
+                    lessFiles = [
+                        ...lessFiles,
+                        `${lessPath}/${themesConfig[i].files[j]}.${themesConfig[i].dsl}`
+                    ];
+                }
+            }
+
+            sources[i] = {
+                css: `${lessPath}/${folders.CSS_FOLDER}`,
+                less: lessFiles,
+                watch: `${lessPath}/${folders.WATCH_FILES}`,
+                imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
+                imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
+                imagesSvgDest: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_DEST}`,
+                svgStyleFile: `${imgFiles}/${folders.IMAGE_SVG_STYLE_FILE}`,
+                svgSpriteFolder: `${imgFiles}/${folders.IMAGE_SVG_SPRITE_FOLDER}`
+            };
+
+            execPaths = [
+                ...execPaths,
+                `${commands.EXECUTION_FILE} ${commands.EXEC_COMMAND} --locale='${
+                    themesConfig[i].locale
+                }' --area='${themesConfig[i].area}' --theme='${
+                    themesConfig[i].name
+                }' ${themesConfig[i].files.join(' ')}`
+            ];
+
+            cleanPaths = [
+                ...cleanPaths,
+                `${folders.PUB_STATIC}/${themesConfig[i].area}/${
+                    themesConfig[i].name
+                }/`
             ];
         }
-
-        sources[i] = {
-            css: `${lessPath}/${constants.CSS_FOLDER}`,
-            less: lessFiles,
-            watch: `${lessPath}/${constants.WATCH_FILES}`,
-            imagesSrc: `${imgFiles}/${constants.IMAGE_FOLDER_SRC}`,
-            imagesDest: `${imgFiles}/${constants.IMAGE_FOLDER_DEST}`,
-            imagesSvg: `${imgFiles}/${constants.IMAGE_SVG_FOLDER}`,
-            imagesSvgSrc: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_SRC}`,
-            imagesSvgDest: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_DEST}`,
-            svgStyleFile: `${imgFiles}/${constants.IMAGE_SVG_STYLE_FILE}`,
-            svgSpriteFolder: `${imgFiles}/${constants.IMAGE_SVG_SPRITE_FOLDER}`
-        };
-
-        execPaths = [
-            ...execPaths,
-            `${constants.EXECUTION_FILE} ${constants.EXEC_COMMAND} --locale="${
-                themesConfig[i].locale
-            }" --area="${themesConfig[i].area}" --theme="${
-                themesConfig[i].name
-            }" ${themesConfig[i].files.join(" ")}`
-        ];
-
-        cleanPaths = [
-            ...cleanPaths,
-            `${constants.PUB_STATIC}/${themesConfig[i].area}/${
-                themesConfig[i].name
-            }/`
-        ];
     }
+    /* eslint-enable max-depth */
 } else if (matchTheme.packages.indexOf(args.themeName) > -1) {
     let lessFiles = [];
 
-    let lessPath = `${constants.PUB_STATIC}/${
+    let lessPath = `${folders.PUB_STATIC}/${
         themesConfig[args.themeName].area
     }/${themesConfig[args.themeName].name}/${
         themesConfig[args.themeName].locale
     }`;
 
-    let imgFiles = `${constants.THEME_FOLDER}/${
+    let imgFiles = `${folders.THEME_FOLDER}/${
         themesConfig[args.themeName].area
     }/${themesConfig[args.themeName].name}`;
 
+    /* eslint-disable max-depth */
     for (let j in themesConfig[args.themeName].files) {
-        lessFiles = [
-            ...lessFiles,
-            `${lessPath}/${themesConfig[args.themeName].files[j]}.${
-                themesConfig[args.themeName].dsl
-            }`
-        ];
+        if ({}.hasOwnProperty.call(themesConfig[args.themeName].files, j)) {
+            lessFiles = [
+                ...lessFiles,
+                `${lessPath}/${themesConfig[args.themeName].files[j]}.${
+                    themesConfig[args.themeName].dsl
+                }`
+            ];
+        }
     }
+    /* eslint-enable max-depth */
 
     sources[args.themeName] = {
-        css: `${lessPath}/${constants.CSS_FOLDER}`,
+        css: `${lessPath}/${folders.CSS_FOLDER}`,
         less: lessFiles,
-        watch: `${lessPath}/${constants.WATCH_FILES}`,
-        imagesSrc: `${imgFiles}/${constants.IMAGE_FOLDER_SRC}`,
-        imagesDest: `${imgFiles}/${constants.IMAGE_FOLDER_DEST}`,
-        imagesSvg: `${imgFiles}/${constants.IMAGE_SVG_FOLDER}`,
-        imagesSvgSrc: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_SRC}`,
-        imagesSvgDest: `${imgFiles}/${constants.IMAGE_SVG_FOLDER_DEST}`,
-        svgStyleFile: `${imgFiles}/${constants.IMAGE_SVG_STYLE_FILE}`,
-        svgSpriteFolder: `${imgFiles}/${constants.IMAGE_SVG_SPRITE_FOLDER}`
+        watch: `${lessPath}/${folders.WATCH_FILES}`,
+        imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
+        imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
+        imagesSvgDest: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_DEST}`,
+        svgStyleFile: `${imgFiles}/${folders.IMAGE_SVG_STYLE_FILE}`,
+        svgSpriteFolder: `${imgFiles}/${folders.IMAGE_SVG_SPRITE_FOLDER}`
     };
 
     execPaths = [
         ...execPaths,
-        `${constants.EXECUTION_FILE} ${constants.EXEC_COMMAND} --locale="${
+        `${commands.EXECUTION_FILE} ${commands.EXEC_COMMAND} --locale='${
             themesConfig[args.themeName].locale
-        }" --area="${themesConfig[args.themeName].area}" --theme="${
+        }' --area='${themesConfig[args.themeName].area}' --theme='${
             themesConfig[args.themeName].name
-        }" ${themesConfig[args.themeName].files.join(" ")}`
+        }' ${themesConfig[args.themeName].files.join(' ')}`
     ];
 
     cleanPaths = [
         ...cleanPaths,
-        `${constants.PUB_STATIC}/${themesConfig[args.themeName].area}/${
+        `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${
             themesConfig[args.themeName].name
         }/`
     ];

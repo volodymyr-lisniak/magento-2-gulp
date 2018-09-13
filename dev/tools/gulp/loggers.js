@@ -14,7 +14,7 @@ module.exports = {
     matchTheme: (theme, packages) => {
         console.log(
             color('Theme', 'WHITE'),
-            color(`"${theme}"`, 'MAGENTA'),
+            color(`'${theme}'`, 'MAGENTA'),
             color('is absent in', 'WHITE'),
             color('themes.js.', 'MAGENTA'),
             color('\nAvalible theme(s):', 'WHITE'),
@@ -47,7 +47,9 @@ module.exports = {
         );
 
         for (let i in source) {
-            console.log(color(source[i], 'MAGENTA'));
+            if ({}.hasOwnProperty.call(source, i)) {
+                console.log(color(source[i], 'MAGENTA'));
+            }
         }
     },
 
@@ -55,26 +57,26 @@ module.exports = {
         console.log(
             color('\nAWS Magento 2 Gulp', 'GREEN'),
             color('version', 'WHITE'),
-            color('1.1.0\n\n', 'YELLOW'),
+            color('1.2.0\n\n', 'YELLOW'),
             color('Usage:\n', 'YELLOW'),
             color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
             color('Avaliable commands:\n', 'YELLOW'),
             color('  default, help                  ', 'GREEN'),
             color('Display this help message\n', 'WHITE'),
-            color('  cache-flush                    ', 'GREEN'),
-            color('Flush Magento cache\n', 'WHITE'),
+            color('  cache-clean                    ', 'GREEN'),
+            color('Clean Magento cache\n', 'WHITE'),
             color('  clean                          ', 'GREEN'),
             color('Remove cached files (pub/static/*, var/*)\n', 'WHITE'),
-            color('  image-min                      ', 'GREEN'),
-            color('Optimization images in folder app/design/frontend/<your_vendor_name>/<your_theme_name>/web/images/src/\n', 'WHITE'),
-            color('  svg                            ', 'GREEN'),
-            color('Create a sprite from the pictures in the folder app/design/frontend/<your_vendor_name>/<your_theme_name>/web/images/icons/\n', 'WHITE'),
             color('  exec                           ', 'GREEN'),
             color('Republishes symlinks to the source files\n', 'WHITE'),
             color('  less                           ', 'GREEN'),
             color('Compile LESS to CSS\n', 'WHITE'),
             color('  watch                          ', 'GREEN'),
-            color('Watch for theme files\n\n', 'WHITE'),
+            color('Watch for theme files\n', 'WHITE'),
+            color('  es6                            ', 'GREEN'),
+            color('Compile ES6+ to ES5\n', 'WHITE'),
+            color('  svg                            ', 'GREEN'),
+            color('Create SVG sprite\n\n', 'WHITE'),
             color('Options:\n', 'YELLOW'),
             color('  --[package]                    ', 'GREEN'),
             color(

@@ -8,8 +8,9 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const runSequence = require('run-sequence');
-
-module.exports = cb => {
-    runSequence('help', cb);
+module.exports = {
+    proxy: 'http://hostname.loc/',
+    host: 'hostname.loc',
+    tunnel: 'hostname',
+    open: false
 };
