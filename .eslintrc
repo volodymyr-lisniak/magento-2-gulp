@@ -10,6 +10,7 @@
         "consistent-return": 2,
         "eqeqeq": [2, "smart"],
         "guard-for-in": 2,
+        "indent": ["error", 4],
         "lines-around-comment": [
             2,
             {
@@ -70,8 +71,11 @@
         "radix": 2,
         "semi": [2, "always"],
         "semi-spacing": 2,
+        "space-before-blocks": 2,
+        "space-before-function-paren": ["error", "never"],
         "use-isnan": 2,
         "valid-typeof": 2,
-        "vars-on-top": 2
+        "vars-on-top": 2,
+        "quotes": [2, "single", { "avoidEscape": true }]
     }
 }

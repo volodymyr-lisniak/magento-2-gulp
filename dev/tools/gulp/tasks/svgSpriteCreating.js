@@ -46,8 +46,7 @@ module.exports = () => {
                                 sprite: folders.IMAGE_SVG_SPRITE_FOLDER_DEST,
                                 render: {
                                     less: {
-                                        dest:
-                                            folders.IMAGE_SVG_STYLES_FOLDER_DEST
+                                        dest: folders.IMAGE_SVG_STYLES_FOLDER_DEST
                                     }
                                 }
                             }

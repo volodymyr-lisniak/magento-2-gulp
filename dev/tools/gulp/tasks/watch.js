@@ -43,9 +43,7 @@ module.exports = () => {
                 } else if (args.bsArg >= 0) {
                     browserSync.init(bsConfig);
 
-                    browserSync
-                        .watch(`${paths.sources[source].css}*.css`)
-                        .on('change', browserSync.reload);
+                    browserSync.watch(`${paths.sources[source].css}*.css`).on('change', browserSync.reload);
                 }
 
                 gulp.watch([`${paths.sources[source].watch}`], ['less']);

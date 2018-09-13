@@ -29,10 +29,7 @@ module.exports = cb => {
         Object.keys(paths.sources).forEach((source, index, array) => {
             itemsProcessed++;
 
-            del.sync([
-                paths.sources[source].svgStyleFile,
-                paths.sources[source].svgSpriteFolder
-            ]);
+            del.sync([paths.sources[source].svgStyleFile, paths.sources[source].svgSpriteFolder]);
 
             if (itemsProcessed === array.length) {
                 runSequence('svg-create', cb);
