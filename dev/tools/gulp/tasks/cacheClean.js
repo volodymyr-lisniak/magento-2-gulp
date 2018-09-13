@@ -8,8 +8,18 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const runSequence = require('run-sequence');
+const child_process = require('child_process');
+
+const commands = require('../constants/commands');
 
 module.exports = cb => {
-    runSequence('help', cb);
+    child_process.exec(
+        `${commands.EXECUTION_FILE} ${commands.CACHE_FLUSH_COMMAND}`,
+
+        (err, stdout, stderr) => {
+            console.log(stdout);
+            console.log(stderr);
+            cb(err);
+        }
+    );
 };

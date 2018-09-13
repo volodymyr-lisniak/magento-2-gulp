@@ -8,35 +8,31 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const del = require('del');
-const runSequence = require('run-sequence');
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins')();
 
 const args = require('../args');
 const paths = require('../paths');
 const loggers = require('../loggers');
+const folders = require('../constants/folders');
 const matchTheme = require('../matchTheme');
 
-module.exports = cb => {
+module.exports = () => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
-        let task = 'Cleaning svg sprite files';
+        let task = 'JS compilation';
 
         loggers.task(task, Object.keys(paths.sources));
 
-        let itemsProcessed = 0;
-
-        Object.keys(paths.sources).forEach((source, index, array) => {
-            itemsProcessed++;
-
-            del.sync([
-                paths.sources[source].svgStyleFile,
-                paths.sources[source].svgSpriteFolder
-            ]);
-
-            if (itemsProcessed === array.length) {
-                runSequence('svg-create', cb);
-            }
-        });
+        return gulp
+            .src(folders.JS_FOLDER_SRC)
+            .pipe(plugins.rename((path) => {
+                path.dirname = `${path.dirname}/${folders.JS_FOLDER_DIST}`;
+            }))
+            .pipe(plugins.babel())
+            .pipe(gulp.dest(folders.JS_FOLDER_BASEDIR));
     }
+
+    return this;
 };

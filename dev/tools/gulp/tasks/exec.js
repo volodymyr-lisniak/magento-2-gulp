@@ -8,7 +8,6 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const gulp = require('gulp');
 const exec = require('exec-queue');
 
 const args = require('../args');

@@ -8,16 +8,15 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const gulp = require('gulp');
 const del = require('del');
 
 const args = require('../args');
 const paths = require('../paths');
 const loggers = require('../loggers');
-const constants = require('../constants');
+const folders = require('../constants/folders');
 const matchTheme = require('../matchTheme');
 
-module.exports = cb => {
+module.exports = () => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
@@ -25,7 +24,7 @@ module.exports = cb => {
 
         loggers.task(task, paths.cleanPaths);
 
-        del(constants.CACHED_FILES);
+        del(folders.CACHED_FILES);
 
         paths.cleanPaths.forEach(cleanOptions => {
             del([`${cleanOptions}`]);

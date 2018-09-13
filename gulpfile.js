@@ -13,13 +13,12 @@ const requireDir = require('require-dir');
 
 const tasks = requireDir('dev/tools/gulp/tasks');
 
-gulp.task('cache-flush', tasks.cacheFlush);
+gulp.task('help', tasks.help);
+gulp.task('default', tasks.default);
+gulp.task('cache-clean', tasks.cacheClean);
 gulp.task('clean', tasks.clean);
 gulp.task('exec', tasks.exec);
 gulp.task('less', tasks.less);
 gulp.task('watch', tasks.watch);
-gulp.task('help', tasks.help);
-gulp.task('default', tasks.default);
-gulp.task('svg-create', tasks.svgSpriteCreating);
+gulp.task('es6', tasks.es6);
 gulp.task('svg', tasks.svgSprite);
-gulp.task('image-min', tasks.imageMin);

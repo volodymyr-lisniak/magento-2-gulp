@@ -15,7 +15,8 @@ const browserSync = require('browser-sync').create();
 const args = require('../args');
 const paths = require('../paths');
 const loggers = require('../loggers');
-const constants = require('../constants');
+const arguments = require('../constants/arguments');
+const bsConfig = require('../constants/bsConfig');
 const matchTheme = require('../matchTheme');
 
 module.exports = () => {
@@ -23,10 +24,10 @@ module.exports = () => {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else if (
         !args.themeName ||
-        args.themeName === constants.MAP_KEY ||
-        args.themeName === constants.MIN_KEY ||
-        args.themeName === constants.LIVE_KEY ||
-        args.themeName === constants.BS_KEY
+        args.themeName === arguments.MAP_KEY ||
+        args.themeName === arguments.MIN_KEY ||
+        args.themeName === arguments.LIVE_KEY ||
+        args.themeName === arguments.BS_KEY
     ) {
         loggers.specifyTheme(matchTheme.avaliablePackages);
     } else {
@@ -34,23 +35,22 @@ module.exports = () => {
 
         loggers.task(task, Object.keys(paths.sources));
 
+        /* eslint-disable max-depth */
         for (let source in paths.sources) {
-            if (args.liveArg >= 0) {
-                livereload.listen();
-            } else if (args.bsArg >= 0) {
-                browserSync.init({
-                    proxy: 'http://[hostname].loc/',
-                    host: '[hostname].loc',
-                    tunnel: '[hostname]',
-                    open: false
-                });
+            if ({}.hasOwnProperty.call(paths.sources, source)) {
+                if (args.liveArg >= 0) {
+                    livereload.listen();
+                } else if (args.bsArg >= 0) {
+                    browserSync.init(bsConfig);
 
-                browserSync
-                    .watch(`${paths.sources[source].css}*.css`)
-                    .on('change', browserSync.reload);
+                    browserSync
+                        .watch(`${paths.sources[source].css}*.css`)
+                        .on('change', browserSync.reload);
+                }
+
+                gulp.watch([`${paths.sources[source].watch}`], ['less']);
             }
-
-            gulp.watch([`${paths.sources[source].watch}`], ['less']);
         }
+        /* eslint-enable max-depth */
     }
 };

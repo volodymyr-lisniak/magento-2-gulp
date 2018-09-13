@@ -8,8 +8,6 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const gulp = require('gulp');
-
 const loggers = require('../loggers');
 
 module.exports = () => {

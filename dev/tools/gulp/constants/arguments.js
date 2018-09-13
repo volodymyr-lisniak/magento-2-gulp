@@ -8,19 +8,9 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const gulp = require('gulp');
-const child_process = require('child_process');
-
-const constants = require('../constants');
-
-module.exports = cb => {
-    child_process.exec(
-        `${constants.EXECUTION_FILE} ${constants.CACHE_FLUSH_COMMAND}`,
-
-        (err, stdout, stderr) => {
-            console.log(stdout);
-            console.log(stderr);
-            cb(err);
-        }
-    );
+module.exports = {
+    BS_KEY: 'bs',
+    MAP_KEY: 'map',
+    MIN_KEY: 'min',
+    LIVE_KEY: 'live'
 };
