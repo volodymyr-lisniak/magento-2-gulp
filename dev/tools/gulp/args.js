@@ -8,7 +8,7 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const arguments = require('./constants/arguments');
+const devArgs = require('./constants/devArgs');
 
 const devArguments = (argList => {
     let args = [];
@@ -31,8 +31,8 @@ const devArguments = (argList => {
 
 module.exports = {
     themeName: devArguments[0],
-    sourceMapArg: devArguments.indexOf(arguments.MAP_KEY),
-    minCssArg: devArguments.indexOf(arguments.MIN_KEY),
-    liveArg: devArguments.indexOf(arguments.LIVE_KEY),
-    bsArg: devArguments.indexOf(arguments.BS_KEY)
+    sourceMapArg: devArguments.indexOf(devArgs.MAP_KEY),
+    minCssArg: devArguments.indexOf(devArgs.MIN_KEY),
+    liveArg: devArguments.indexOf(devArgs.LIVE_KEY),
+    bsArg: devArguments.indexOf(devArgs.BS_KEY)
 };
