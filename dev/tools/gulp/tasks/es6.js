@@ -33,6 +33,7 @@ module.exports = () => {
                 })
             )
             .pipe(plugins.babel())
+            .pipe(plugins.prettierEslint())
             .pipe(gulp.dest(folders.JS_FOLDER_BASEDIR));
     }
 
