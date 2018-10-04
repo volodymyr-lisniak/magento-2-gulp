@@ -10,8 +10,8 @@
 
 module.exports = {
     CSS_FOLDER: 'css/',
-    JS_FOLDER_SRC: 'app/**/web/js/src/*.js',
-    JS_FOLDER_DIST: '../dist/',
+    JS_FOLDER_SRC: 'app/**/web/js/**/src/*.js',
+    JS_FOLDER_DIST: '../',
     JS_FOLDER_BASEDIR: 'app/',
     IMAGE_SVG_FOLDER: 'web/',
     IMAGE_SVG_FOLDER_SRC: 'web/images/icons/**/*',

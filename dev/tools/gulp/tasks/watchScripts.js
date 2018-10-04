@@ -9,15 +9,13 @@
  */
 
 const gulp = require('gulp');
-const livereload = require('gulp-livereload');
-const browserSync = require('browser-sync').create();
 
 const args = require('../args');
 const paths = require('../paths');
 const loggers = require('../loggers');
 const devArgs = require('../constants/devArgs');
-const bsConfig = require('../constants/bsConfig');
 const matchTheme = require('../matchTheme');
+const folders = require('../constants/folders');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {
@@ -31,24 +29,10 @@ module.exports = () => {
     ) {
         loggers.specifyTheme(matchTheme.avaliablePackages);
     } else {
-        let task = 'Watching';
+        let task = 'Watching JS';
 
         loggers.task(task, Object.keys(paths.sources));
 
-        /* eslint-disable max-depth */
-        for (let source in paths.sources) {
-            if ({}.hasOwnProperty.call(paths.sources, source)) {
-                if (args.liveArg >= 0) {
-                    livereload.listen();
-                } else if (args.bsArg >= 0) {
-                    browserSync.init(bsConfig);
-
-                    browserSync.watch(`${paths.sources[source].css}*.css`).on('change', browserSync.reload);
-                }
-
-                gulp.watch([`${paths.sources[source].watch}`], ['less']);
-            }
-        }
-        /* eslint-enable max-depth */
+        gulp.watch([folders.JS_FOLDER_SRC], ['es6']);
     }
 };

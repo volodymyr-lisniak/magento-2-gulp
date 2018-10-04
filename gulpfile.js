@@ -19,6 +19,7 @@ gulp.task('cache-clean', tasks.cacheClean);
 gulp.task('clean', tasks.clean);
 gulp.task('exec', tasks.exec);
 gulp.task('less', tasks.less);
-gulp.task('watch', tasks.watch);
+gulp.task('watch-styles', tasks.watchStyles);
+gulp.task('watch-scripts', tasks.watchScripts);
 gulp.task('es6', tasks.es6);
 gulp.task('svg', tasks.svgSprite);
