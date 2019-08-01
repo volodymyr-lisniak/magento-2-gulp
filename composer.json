@@ -2,7 +2,7 @@
     "name": "absolutewebservices/magento-2.x-gulp",
     "type": "aws-mapping",
     "description": "Magento 2 gulp configuration",
-    "homepage": "https://bitbucket.org/absolutewebservices/magento-1.x-gulp",
+    "homepage": "https://bitbucket.org/absolutewebservices/magento-2.x-gulp",
     "authors": [
         {
             "name": "AWS Team"
@@ -17,7 +17,6 @@
         "aws-mapping-strategy": "force",
         "aws-mapping": {
             "dev/tools/gulp": "dev/tools/gulp",
-            "lint/precommit-hook": "lint/precommit-hook",
             "gulpfile.js": "gulpfile.js",
             "package.json.sample-aws": "package.json.sample-aws",
             ".stylelintrc": ".stylelintrc",
