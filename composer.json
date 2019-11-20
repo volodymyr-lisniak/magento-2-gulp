@@ -9,7 +9,6 @@
     ],
     "minimum-stability": "dev",
     "extra": {
-        "aws-mapping-strategy": "force",
         "map": [
             [
                 "dev/tools/gulp",

@@ -19,18 +19,21 @@ $ npm install gulp -g
 
 ### Composer
 
-Add gulp dependence to project's `composer.json`
+Add repository's path to the `composer.json`
 
 ```
-"require": {
-    "bobmotor/magento-2-gulp":"~1.2.0"
-}
+"repositories": [
+    {
+        "type": "github",
+        "url": "https://github.com/bobmotor/magento-2-gulp"
+    }
+],
 ```
 
 Run
 
 ```
-$ composer update --prefer-source
+$ composer require bobmotor/magento-2-gulp
 ```
 
 Install modules listed as dependencies in `package.json`
@@ -128,6 +131,7 @@ cache-flush                     Flush Magento cache
 clean                           Remove cached files (pub/static/*, var/*)
 exec                            Republishes symlinks to the source files
 less                            Compile LESS to CSS
+critical                        Compile critical css
 watch                           Watch for theme files
 es6                             Compile ES6+ to ES5
 svg                             Create svg sprite
