@@ -1,5 +1,6 @@
 {
     "name": "bobmotor/magento-2-gulp",
+    "type": "magento2-component",
     "description": "Magento 2 gulp configuration",
     "homepage": "https://github.com/bobmotor/magento-2-gulp",
     "authors": [
