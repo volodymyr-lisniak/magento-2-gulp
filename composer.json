@@ -1,0 +1,35 @@
+{
+    "name": "bobmotor/magento-2-gulp",
+    "description": "Magento 2 gulp configuration",
+    "homepage": "https://github.com/bobmotor/magento-2-gulp",
+    "authors": [
+        {
+            "name": "Absolute Web"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "aws-mapping-strategy": "force",
+        "map": [
+            [
+                "dev/tools/gulp",
+                "dev/tools/gulp"
+            ], [
+                "gulpfile.js",
+                "gulpfile.js"
+            ], [
+                "package.json.sample-aws",
+                "package.json.sample-aws"
+            ], [
+                ".stylelintrc",
+                ".stylelintrc"
+            ], [
+                ".eslintrc",
+                ".eslintrc"
+            ], [
+                ".babelrc",
+                ".babelrc"
+            ]
+        ]
+    }
+}
