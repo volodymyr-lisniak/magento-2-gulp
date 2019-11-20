@@ -2,7 +2,7 @@
  * Absolute Web Services Intellectual Property
  *
  * @category     {development/deployment}
- * @copyright    Copyright © 1999-2018 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
+ * @copyright    Copyright © 1999-2020 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
  * @author       Absolute Web Services
  * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
@@ -57,7 +57,7 @@ module.exports = {
         console.log(
             color('\nAWS Magento 2 Gulp', 'GREEN'),
             color('version', 'WHITE'),
-            color('1.2.3\n\n', 'YELLOW'),
+            color('1.3.0\n\n', 'YELLOW'),
             color('Usage:\n', 'YELLOW'),
             color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
             color('Avaliable commands:\n', 'YELLOW'),
@@ -71,6 +71,8 @@ module.exports = {
             color('Republishes symlinks to the source files\n', 'WHITE'),
             color('  less                           ', 'GREEN'),
             color('Compile LESS to CSS\n', 'WHITE'),
+            color('  critical                       ', 'GREEN'),
+            color('Compile critical css\n', 'WHITE'),
             color('  watch                          ', 'GREEN'),
             color('Watch for theme files\n', 'WHITE'),
             color('  es6                            ', 'GREEN'),
