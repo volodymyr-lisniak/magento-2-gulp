@@ -119,6 +119,30 @@ module.exports = {
 };
 ```
 
+To configure critical CSS compilation set `url` and your desired screen size in the `dev/tools/gulp/constants/criticalConfig.js`
+
+```
+module.exports = {
+    out: 'critical.css',
+    url: 'http://localhost.loc/',
+    width: 1920,
+    height: 900,
+    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+};
+```
+
+Example:
+
+```
+module.exports = {
+    out: 'critical.css',
+    url: 'http://capezio.loc/',
+    width: 1920,
+    height: 900,
+    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+};
+```
+
 ### How to use
 
 In project root dir run `gulp [command] --[package] --[arguments]`
