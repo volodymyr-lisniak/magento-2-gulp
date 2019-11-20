@@ -2,7 +2,7 @@
  * Absolute Web Services Intellectual Property
  *
  * @category     {development/deployment}
- * @copyright    Copyright © 1999-2018 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
+ * @copyright    Copyright © 1999-2020 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
  * @author       Absolute Web Services
  * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
@@ -32,9 +32,9 @@ if (
         if ({}.hasOwnProperty.call(themesConfig, i)) {
             let lessFiles = [];
 
-            let lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/${
-                themesConfig[i].locale
-            }`;
+            let lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/${themesConfig[i].locale}`;
+
+            let criticalDest = `${folders.THEME_FOLDER}/frontend/${themesConfig[i].name}/${folders.CRITICAL_CSS_DEST}`;
 
             let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}`;
 
@@ -47,6 +47,11 @@ if (
             sources[i] = {
                 css: `${lessPath}/${folders.CSS_FOLDER}`,
                 less: lessFiles,
+                criticalSrc: [
+                    `${lessPath}/${folders.CSS_FOLDER}styles-l.css`,
+                    `${lessPath}/${folders.CSS_FOLDER}styles-m.css`
+                ],
+                criticalDest: criticalDest,
                 watch: `${lessPath}/${folders.WATCH_FILES}`,
                 imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
                 imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
@@ -69,11 +74,11 @@ if (
 } else if (matchTheme.packages.indexOf(args.themeName) > -1) {
     let lessFiles = [];
 
-    let lessPath = `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${
-        themesConfig[args.themeName].locale
-    }`;
+    let lessPath = `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${themesConfig[args.themeName].locale}`;
 
     let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}`;
+
+    let criticalDest = `${folders.THEME_FOLDER}/frontend/${themesConfig[args.themeName].name}/${folders.CRITICAL_CSS_DEST}`;
 
     /* eslint-disable max-depth */
     for (let j in themesConfig[args.themeName].files) {
@@ -89,6 +94,11 @@ if (
     sources[args.themeName] = {
         css: `${lessPath}/${folders.CSS_FOLDER}`,
         less: lessFiles,
+        criticalSrc: [
+            `${lessPath}/${folders.CSS_FOLDER}styles-l.css`,
+            `${lessPath}/${folders.CSS_FOLDER}styles-m.css`
+        ],
+        criticalDest: criticalDest,
         watch: `${lessPath}/${folders.WATCH_FILES}`,
         imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
         imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,

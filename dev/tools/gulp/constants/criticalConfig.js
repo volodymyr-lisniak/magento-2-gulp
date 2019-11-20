@@ -8,8 +8,10 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const loggers = require('../loggers');
-
-module.exports = () => {
-    loggers.help();
+module.exports = {
+    out: 'critical.css',
+    url: 'http://localhost.loc/',
+    width: 1920,
+    height: 900,
+    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 };
