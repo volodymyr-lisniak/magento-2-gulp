@@ -36,6 +36,10 @@ Run
 $ composer require bobmotor/magento-2-gulp
 ```
 
+Rename the following files in your project root directory
+
+* `package.json.sample-aws` to `package.json`
+
 Install modules listed as dependencies in `package.json`
 
 ```
@@ -47,6 +51,10 @@ $ npm install
 Copy source files to your project root directory
 
 
+Rename the following files in your project root directory
+
+* `package.json.sample-aws` to `package.json`
+
 Install modules listed as dependencies in `package.json`
 
 ```
@@ -54,10 +62,6 @@ $ npm install
 ```
 
 ## Configuration
-
-Rename the following files in your project root directory
-
-* `package.json.sample-aws` to `package.json`
 
 Check or set theme configuration in the `dev/tools/grunt/configs/themes.js`
 
