@@ -17,7 +17,7 @@ $ npm install gulp -g
 
 ## Project integration
 
-### Composer
+- ### Composer
 
 Add repository's path to the `composer.json`
 
@@ -42,7 +42,7 @@ Install modules listed as dependencies in `package.json`
 $ npm install
 ```
 
-### Manually
+- ### Manually
 
 Copy source files to your project root directory
 
