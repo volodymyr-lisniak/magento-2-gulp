@@ -193,4 +193,4 @@ gulp critical --capezio
 Note:
 
 * ES6 files should be placed at `.../web/js/src/*.js`. Compiled files will be in the `.../web/js/dist/`
-* svg icons (`*.svg`) need to be uploaded to `app/design/frontend/<your_vendor_name>/<your_theme_name>/web/images/icons/`
+* svg icons (`*.svg`) need to be uploaded to `app/design/frontend/<VandorName>/<ThemeName>/web/images/icons/`
