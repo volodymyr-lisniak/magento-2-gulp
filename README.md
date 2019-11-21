@@ -185,6 +185,10 @@ Compiles CSS files using the symlinks published in the `pub/static/frontend/ dir
 ```
 gulp less --capezio --map
 ```
+Watch styles with `livereload` (`LiveReload` browser extension should be installed)
+```
+gulp watch-styles --capezio --map --live
+```
 Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`
 ```
 gulp critical --capezio
