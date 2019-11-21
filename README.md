@@ -175,10 +175,19 @@ Options:
 --bs                            Enable browsersync
 ```
 
-Example:
+Examples:
 
+1. Removes the theme related static files in the `pub/static` and `var` directories, republishes symlinks to the source files to the `pub/static/frontend/ directory` and compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map and minification. 
 ```
-gulp clean --capezio && gulp exec --capezio && gulp less --capezio --map
+gulp clean --capezio && gulp exec --capezio && gulp less --capezio --map --min
+```
+2. Compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map.
+```
+gulp less --capezio --map
+```
+3. Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`
+```
+gulp critical --capezio
 ```
 
 Note:
