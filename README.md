@@ -63,7 +63,8 @@ $ npm install
 
 ## Configuration
 
-Check or set theme configuration in the `dev/tools/grunt/configs/themes.js`
+Copy the contents of `themes.js` into `local-themes.js` in the `dev/tools/grunt/configs/` directory.
+
 
 ```
 module.exports = {
