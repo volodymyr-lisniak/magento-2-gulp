@@ -65,7 +65,6 @@ $ npm install
 
 Copy the contents of `themes.js` into `local-themes.js` in the `dev/tools/grunt/configs/` directory.
 
-
 ```
 module.exports = {
     ...
