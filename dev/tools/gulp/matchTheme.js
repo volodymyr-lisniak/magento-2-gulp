@@ -8,7 +8,7 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const themesConfig = require('../grunt/configs/themes');
+const themesConfig = require('../grunt/configs/local-themes');
 
 const packages = Object.keys(themesConfig);
 

@@ -9,7 +9,7 @@
  */
 
 const args = require('./args');
-const themesConfig = require('../grunt/configs/themes');
+const themesConfig = require('../grunt/configs/local-themes');
 const matchTheme = require('./matchTheme');
 const devArgs = require('./constants/devArgs');
 const commands = require('./constants/commands');
