@@ -63,7 +63,7 @@ $ npm install
 
 ## Configuration
 
-Copy the contents of `themes.js` into `local-themes.js` in the `dev/tools/grunt/configs/` directory.
+Copy the contents of `themes.js` into `local-themes.js` and add your theme configuration in the `dev/tools/grunt/configs/` directory.
 
 ```
 module.exports = {
@@ -149,7 +149,7 @@ module.exports = {
 
 ### How to use
 
-In project root dir run `gulp [command] --[package] --[arguments]`
+In project root dir run `gulp [command] --[theme] --[arguments]`
 
 Avaliable commands:
 
@@ -160,7 +160,8 @@ clean                           Remove cached files (pub/static/*, var/*)
 exec                            Republishes symlinks to the source files
 less                            Compile LESS to CSS
 critical                        Compile critical css
-watch                           Watch for theme files
+watch-styles                    Watch for *.less files
+watch-scripts                   Watch for src/*.js files
 es6                             Compile ES6+ to ES5
 svg                             Create svg sprite
 ```
@@ -196,5 +197,5 @@ gulp critical --capezio
 
 Note:
 
-* ES6 files should be placed at `.../web/js/src/*.js`. Compiled files will be in the `.../web/js/dist/`
+* ES6 files should be placed at `.../web/js/src/*.js`. Compiled files will be in the `.../web/js/*.js`
 * svg icons (`*.svg`) need to be uploaded to `app/design/frontend/<VandorName>/<ThemeName>/web/images/icons/`
