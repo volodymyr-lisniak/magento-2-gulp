@@ -33,7 +33,7 @@ Add repository's path to the `composer.json`
 Run
 
 ```
-$ composer require bobmotor/magento-2-gulp
+$ composer require --dev bobmotor/magento-2-gulp
 ```
 
 Rename the following files in your project root directory
