@@ -2,6 +2,7 @@
     "name": "bobmotor/magento-2-gulp",
     "type": "magento2-component",
     "description": "Magento 2 gulp configuration",
+    "license": "MIT",
     "homepage": "https://github.com/bobmotor/magento-2-gulp",
     "authors": [
         {
