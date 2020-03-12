@@ -11,11 +11,11 @@
 const gulp = require('gulp');
 
 const args = require('../args');
-const paths = require('../paths');
-const loggers = require('../loggers');
 const devArgs = require('../constants/devArgs');
-const matchTheme = require('../matchTheme');
 const folders = require('../constants/folders');
+const loggers = require('../loggers');
+const matchTheme = require('../matchTheme');
+const paths = require('../paths');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {

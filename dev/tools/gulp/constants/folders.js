@@ -9,20 +9,20 @@
  */
 
 module.exports = {
-    CSS_FOLDER: 'css/',
+    CACHED_FILES: ['var/cache/**', 'var/view_preprocessed/**'],
     CRITICAL_CSS_DEST: 'web/css',
-    JS_FOLDER_SRC: 'app/**/web/js/**/src/*.js',
-    JS_FOLDER_DIST: '../',
-    JS_FOLDER_BASEDIR: 'app/',
+    CSS_FOLDER: 'css',
     IMAGE_SVG_FOLDER: 'web/',
-    IMAGE_SVG_FOLDER_SRC: 'web/images/icons/**/*',
     IMAGE_SVG_FOLDER_DEST: 'web/images/icons/',
+    IMAGE_SVG_FOLDER_SRC: 'web/images/icons/**/*',
     IMAGE_SVG_STYLES_FOLDER_DEST: '../../../css/source/aws/_aws-sprite-svg.less',
-    IMAGE_SVG_SPRITE_FOLDER_DEST: '../../../images/icons/svg/aws-sprite.svg',
     IMAGE_SVG_STYLE_FILE: 'web/css/source/aws/_aws-sprite-svg.less',
     IMAGE_SVG_SPRITE_FOLDER: 'web/images/icons/svg',
-    WATCH_FILES: '**/*.less',
+    IMAGE_SVG_SPRITE_FOLDER_DEST: '../../../images/icons/svg/aws-sprite.svg',
+    JS_FOLDER_BASEDIR: 'app/',
+    JS_FOLDER_DIST: '../',
+    JS_FOLDER_SRC: 'app/**/web/js/**/src/*.js',
     PUB_STATIC: 'pub/static',
     THEME_FOLDER: 'app/design',
-    CACHED_FILES: ['./var/cache/**', './var/view_preprocessed/**']
+    WATCH_FILES: '**/*.less'
 };

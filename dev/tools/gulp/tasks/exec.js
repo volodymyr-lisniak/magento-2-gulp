@@ -11,9 +11,9 @@
 const exec = require('exec-queue');
 
 const args = require('../args');
-const paths = require('../paths');
 const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
+const paths = require('../paths');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {

@@ -101,7 +101,7 @@ module.exports = {
 }
 ```
 
-To configure BrowserSync set hostnames in the `dev/tools/gulp/constants/bsConfig.js`
+To configure BrowserSync set hostnames in the `dev/tools/gulp/configs/bsConfig.js`
 
 ```
 module.exports = {
@@ -123,15 +123,15 @@ module.exports = {
 };
 ```
 
-To configure critical CSS compilation set `url` and your desired screen size in the `dev/tools/gulp/constants/criticalConfig.js`
+To configure critical CSS compilation set `url` and your desired screen size in the `dev/tools/gulp/configs/criticalConfig.js`
 
 ```
 module.exports = {
     out: 'critical.css',
-    url: 'http://localhost.loc/',
+    url: 'http://hostname.loc/',
     width: 1920,
     height: 900,
-    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+    forceExclude: [/\[data-role=main-css-loader]/]
 };
 ```
 
@@ -143,7 +143,7 @@ module.exports = {
     url: 'http://capezio.loc/',
     width: 1920,
     height: 900,
-    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+    forceExclude: [/\[data-role=main-css-loader]/]
 };
 ```
 
@@ -154,16 +154,16 @@ In project root dir run `gulp [command] --[theme] --[arguments]`
 Avaliable commands:
 
 ```
-default, help                   Display this help message
-cache-flush                     Flush Magento cache
+cache-clean                     Clean Magento cache
 clean                           Remove cached files (pub/static/*, var/*)
+critical                        Compile critical css
+default, help                   Display this help message
+es6                             Compile ES6+ to ES5
 exec                            Republishes symlinks to the source files
 less                            Compile LESS to CSS
-critical                        Compile critical css
-watch-styles                    Watch for *.less files
-watch-scripts                   Watch for src/*.js files
-es6                             Compile ES6+ to ES5
 svg                             Create svg sprite
+watch-scripts                   Watch for src/*.js files
+watch-styles                    Watch for *.less files
 ```
 
 Options:
@@ -178,7 +178,7 @@ Options:
 
 Examples:
 
-Removes the theme related static files in the `pub/static` and `var` directories, republishes symlinks to the source files to the `pub/static/frontend/ directory` and compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map and minification. 
+Removes the theme related static files in the `pub/static` and `var` directories, republishes symlinks to the source files to the `pub/static/frontend/ directory` and compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map and minification.
 ```
 gulp clean --capezio && gulp exec --capezio && gulp less --capezio --map --min
 ```

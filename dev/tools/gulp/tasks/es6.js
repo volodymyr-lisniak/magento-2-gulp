@@ -12,10 +12,10 @@ const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
 
 const args = require('../args');
-const paths = require('../paths');
-const loggers = require('../loggers');
 const folders = require('../constants/folders');
+const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
+const paths = require('../paths');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {
