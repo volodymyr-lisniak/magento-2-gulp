@@ -190,7 +190,8 @@ Watch styles with `livereload` (`LiveReload` browser extension should be install
 ```
 gulp watch-styles --capezio --map --live
 ```
-Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`
+Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`.
+In `production` mode should be run after `php bin/magento s:s:d` (task uses `pub/static/deployed_version.txt` to create relative path from the root of the site)
 ```
 gulp critical --capezio
 ```
