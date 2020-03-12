@@ -9,7 +9,7 @@
  */
 
 module.exports = {
+    CACHE_FLUSH_COMMAND: 'cache:flush',
     EXECUTION_FILE: 'php bin/magento',
-    EXEC_COMMAND: 'dev:source-theme:deploy',
-    CACHE_FLUSH_COMMAND: 'cache:flush'
+    EXEC_COMMAND: 'dev:source-theme:deploy'
 };

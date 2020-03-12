@@ -9,14 +9,14 @@
  */
 
 const gulp = require('gulp');
-const svgSprite = require('gulp-svg-sprite');
 const plugins = require('gulp-load-plugins')();
+const svgSprite = require('gulp-svg-sprite');
 
 const args = require('../args');
-const paths = require('../paths');
+const folders = require('../constants/folders');
 const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
-const folders = require('../constants/folders');
+const paths = require('../paths');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {

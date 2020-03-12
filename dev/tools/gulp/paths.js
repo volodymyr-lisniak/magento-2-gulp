@@ -8,16 +8,21 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const args = require('./args');
-const themesConfig = require('../grunt/configs/local-themes');
-const matchTheme = require('./matchTheme');
-const devArgs = require('./constants/devArgs');
-const commands = require('./constants/commands');
-const folders = require('./constants/folders');
+const fs = require('fs');
 
-let execPaths = [];
-let deployPaths = [];
+const args = require('./args');
+const commands = require('./constants/commands');
+const criticalConfig = require('./configs/criticalConfig');
+const devArgs = require('./constants/devArgs');
+const folders = require('./constants/folders');
+const matchTheme = require('./matchTheme');
+const themesConfig = require('../grunt/configs/local-themes');
+
 let cleanPaths = [];
+let criticalFiles = [];
+let deployPaths = [];
+let deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8');
+let execPaths = [];
 let sources = {};
 
 if (
@@ -30,28 +35,32 @@ if (
     /* eslint-disable max-depth */
     for (let i in themesConfig) {
         if ({}.hasOwnProperty.call(themesConfig, i)) {
-            let lessFiles = [];
-
-            let lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/${themesConfig[i].locale}`;
-
-            let criticalDest = `${folders.THEME_FOLDER}/frontend/${themesConfig[i].name}/${folders.CRITICAL_CSS_DEST}`;
-
-            let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}`;
+            let lessFiles = [],
+                cssSrc = [],
+                lessPath = `${folders.PUB_STATIC}/${themesConfig[i].area}/${
+                    themesConfig[i].name
+                }/${themesConfig[i].locale}`,
+                criticalDest = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${
+                    themesConfig[i].name
+                }/${folders.CRITICAL_CSS_DEST}/`,
+                criticalAbsolutePath = `url(${folders.PUB_STATIC}/version${
+                    deployVersion}/${themesConfig[i].area
+                }/${themesConfig[i].name}/${themesConfig[i].locale}/`,
+                imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}`;
 
             for (let j in themesConfig[i].files) {
                 if ({}.hasOwnProperty.call(themesConfig[i].files, j)) {
                     lessFiles = [...lessFiles, `${lessPath}/${themesConfig[i].files[j]}.${themesConfig[i].dsl}`];
+                    cssSrc = [...cssSrc, `${lessPath}/${themesConfig[i].files[j]}.css`];
                 }
             }
 
             sources[i] = {
                 css: `${lessPath}/${folders.CSS_FOLDER}`,
                 less: lessFiles,
-                criticalSrc: [
-                    `${lessPath}/${folders.CSS_FOLDER}styles-l.css`,
-                    `${lessPath}/${folders.CSS_FOLDER}styles-m.css`
-                ],
+                cssSrc: cssSrc,
                 criticalDest: criticalDest,
+                criticalAbsolutePath: criticalAbsolutePath,
                 watch: `${lessPath}/${folders.WATCH_FILES}`,
                 imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
                 imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
@@ -68,17 +77,32 @@ if (
             ];
 
             cleanPaths = [...cleanPaths, `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/`];
+
+            criticalFiles = [
+                ...criticalFiles,
+                `${folders.PUB_STATIC}/${themesConfig[i].area}/${themesConfig[i].name}/${
+                    themesConfig[i].locale
+                }/${folders.CSS_FOLDER}/${criticalConfig.out}`,
+                `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}/${
+                    folders.CRITICAL_CSS_DEST
+                }/${criticalConfig.out}`
+            ];
         }
     }
     /* eslint-enable max-depth */
-} else if (matchTheme.packages.indexOf(args.themeName) > -1) {
-    let lessFiles = [];
-
-    let lessPath = `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${themesConfig[args.themeName].locale}`;
-
-    let imgFiles = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}`;
-
-    let criticalDest = `${folders.THEME_FOLDER}/frontend/${themesConfig[args.themeName].name}/${folders.CRITICAL_CSS_DEST}`;
+} else if (~matchTheme.packages.indexOf(args.themeName)) {
+    let lessFiles = [],
+        cssSrc = [],
+        lessPath = `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${
+            themesConfig[args.themeName].locale
+        }`,
+        imgFiles = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}`,
+        criticalDest = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${
+            themesConfig[args.themeName].name
+        }/${folders.CRITICAL_CSS_DEST}/`,
+        criticalAbsolutePath = `url(${folders.PUB_STATIC}/version${deployVersion}/${
+            themesConfig[args.themeName].area
+        }/${themesConfig[args.themeName].name}/${themesConfig[args.themeName].locale}/`;
 
     /* eslint-disable max-depth */
     for (let j in themesConfig[args.themeName].files) {
@@ -86,7 +110,8 @@ if (
             lessFiles = [
                 ...lessFiles,
                 `${lessPath}/${themesConfig[args.themeName].files[j]}.${themesConfig[args.themeName].dsl}`
-            ];
+            ],
+            cssSrc = [...cssSrc, `${lessPath}/${themesConfig[args.themeName].files[j]}.css`];
         }
     }
     /* eslint-enable max-depth */
@@ -94,11 +119,9 @@ if (
     sources[args.themeName] = {
         css: `${lessPath}/${folders.CSS_FOLDER}`,
         less: lessFiles,
-        criticalSrc: [
-            `${lessPath}/${folders.CSS_FOLDER}styles-l.css`,
-            `${lessPath}/${folders.CSS_FOLDER}styles-m.css`
-        ],
+        cssSrc: cssSrc,
         criticalDest: criticalDest,
+        criticalAbsolutePath: criticalAbsolutePath,
         watch: `${lessPath}/${folders.WATCH_FILES}`,
         imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
         imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
@@ -120,6 +143,16 @@ if (
         ...cleanPaths,
         `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/`
     ];
+
+    criticalFiles = [
+        ...criticalFiles,
+        `${folders.PUB_STATIC}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${
+            themesConfig[args.themeName].locale
+        }/${folders.CSS_FOLDER}/${criticalConfig.out}`,
+        `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${themesConfig[args.themeName].name}/${
+            folders.CRITICAL_CSS_DEST
+        }/${criticalConfig.out}`
+    ];
 } else {
     matchTheme.matchTheme = false;
 }
@@ -128,5 +161,6 @@ module.exports = {
     execPaths: execPaths,
     deployPaths: deployPaths,
     cleanPaths: cleanPaths,
+    criticalFiles: criticalFiles,
     sources: sources
 };

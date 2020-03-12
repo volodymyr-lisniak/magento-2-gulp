@@ -8,14 +8,14 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
+const browserSync = require('browser-sync').create();
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
-const browserSync = require('browser-sync').create();
 
 const args = require('../args');
-const paths = require('../paths');
 const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
+const paths = require('../paths');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {

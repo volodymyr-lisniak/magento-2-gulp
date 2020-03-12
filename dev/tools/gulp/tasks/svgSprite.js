@@ -12,9 +12,9 @@ const del = require('del');
 const runSequence = require('run-sequence');
 
 const args = require('../args');
-const paths = require('../paths');
 const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
+const paths = require('../paths');
 
 module.exports = cb => {
     if (!matchTheme.matchTheme) {

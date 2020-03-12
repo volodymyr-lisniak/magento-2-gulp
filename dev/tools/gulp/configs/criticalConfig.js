@@ -9,8 +9,9 @@
  */
 
 module.exports = {
-    proxy: 'http://localhost.loc/',
-    host: 'localhost.loc',
-    tunnel: 'hostname',
-    open: false
+    out: 'critical.css',
+    url: 'http://hostname.loc/',
+    width: 1920,
+    height: 250,
+    forceExclude: [/\[data-role=main-css-loader]/]
 };

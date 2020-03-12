@@ -11,23 +11,21 @@
 const del = require('del');
 
 const args = require('../args');
-const paths = require('../paths');
-const loggers = require('../loggers');
 const folders = require('../constants/folders');
+const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
+const paths = require('../paths');
 
 module.exports = () => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else {
         let task = 'clean';
+        let target = 'source(s)';
+        let files = [...folders.CACHED_FILES, ...paths.cleanPaths];
 
-        loggers.task(task, paths.cleanPaths);
+        loggers.task(task, files, target);
 
-        del(folders.CACHED_FILES);
-
-        paths.cleanPaths.forEach(cleanOptions => {
-            del([`${cleanOptions}`]);
-        });
+        del(files);
     }
 };

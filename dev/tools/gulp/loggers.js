@@ -16,7 +16,7 @@ module.exports = {
             color('Theme', 'WHITE'),
             color(`'${theme}'`, 'MAGENTA'),
             color('is absent in', 'WHITE'),
-            color('themes.js.', 'MAGENTA'),
+            color('local-themes.js.', 'MAGENTA'),
             color('\nAvalible theme(s):', 'WHITE'),
             color(`\n${packages}`, 'MAGENTA')
         );
@@ -39,11 +39,13 @@ module.exports = {
         );
     },
 
-    task: (task, source) => {
+    task: (task, source, targetArray) => {
+        let target = targetArray || 'theme(s)';
+
         console.log(
             color('Running gulp task', 'WHITE'),
             color(`${task}`, 'CYAN'),
-            color(`for ${source.length} theme(s):`, 'WHITE')
+            color(`for ${source.length} ${target}:`, 'WHITE')
         );
 
         for (let i in source) {
@@ -57,28 +59,30 @@ module.exports = {
         console.log(
             color('\nAWS Magento 2 Gulp', 'GREEN'),
             color('version', 'WHITE'),
-            color('1.3.0\n\n', 'YELLOW'),
+            color('1.4.0\n\n', 'YELLOW'),
             color('Usage:\n', 'YELLOW'),
             color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
             color('Avaliable commands:\n', 'YELLOW'),
-            color('  default, help                  ', 'GREEN'),
-            color('Display this help message\n', 'WHITE'),
             color('  cache-clean                    ', 'GREEN'),
             color('Clean Magento cache\n', 'WHITE'),
             color('  clean                          ', 'GREEN'),
             color('Remove cached files (pub/static/*, var/*)\n', 'WHITE'),
+            color('  critical                       ', 'GREEN'),
+            color('Compile critical css\n', 'WHITE'),
+            color('  default, help                  ', 'GREEN'),
+            color('Display this help message\n', 'WHITE'),
+            color('  es6                            ', 'GREEN'),
+            color('Compile ES6+ to ES5\n', 'WHITE'),
             color('  exec                           ', 'GREEN'),
             color('Republishes symlinks to the source files\n', 'WHITE'),
             color('  less                           ', 'GREEN'),
             color('Compile LESS to CSS\n', 'WHITE'),
-            color('  critical                       ', 'GREEN'),
-            color('Compile critical css\n', 'WHITE'),
-            color('  watch                          ', 'GREEN'),
-            color('Watch for theme files\n', 'WHITE'),
-            color('  es6                            ', 'GREEN'),
-            color('Compile ES6+ to ES5\n', 'WHITE'),
             color('  svg                            ', 'GREEN'),
-            color('Create SVG sprite\n\n', 'WHITE'),
+            color('Create SVG sprite\n', 'WHITE'),
+            color('  watch-scripts                  ', 'GREEN'),
+            color('Watch for theme files\n', 'WHITE'),
+            color('  watch-styles                   ', 'GREEN'),
+            color('Watch for theme files\n\n', 'WHITE'),
             color('Options:\n', 'YELLOW'),
             color('  --[package]                    ', 'GREEN'),
             color('Package name (optional field). Need to be the first option. Ex.: --luma\n', 'WHITE'),
