@@ -23,6 +23,7 @@ module.exports = {
     JS_FOLDER_DIST: '../',
     JS_FOLDER_SRC: 'app/**/web/js/**/src/*.js',
     PUB_STATIC: 'pub/static',
+    STATIC: '/static',
     THEME_FOLDER: 'app/design',
     WATCH_FILES: '**/*.less'
 };
