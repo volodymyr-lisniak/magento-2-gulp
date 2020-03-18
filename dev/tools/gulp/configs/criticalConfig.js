@@ -8,9 +8,11 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
+const localConfig = require('./local');
+
 module.exports = {
     out: 'critical.css',
-    url: 'http://hostname.loc/',
+    url: `https://${localConfig.hostname}.loc/`,
     width: 1920,
     height: 250,
     forceExclude: [/\[data-role=main-css-loader]/]

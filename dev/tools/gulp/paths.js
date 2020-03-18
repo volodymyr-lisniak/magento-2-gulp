@@ -43,7 +43,7 @@ if (
                 criticalDest = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${
                     themesConfig[i].name
                 }/${folders.CRITICAL_CSS_DEST}/`,
-                criticalAbsolutePath = `url(${folders.PUB_STATIC}/version${
+                criticalAbsolutePath = `url(${criticalConfig.url}${folders.PUB_STATIC}/version${
                     deployVersion}/${themesConfig[i].area
                 }/${themesConfig[i].name}/${themesConfig[i].locale}/`,
                 imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}`;
@@ -100,7 +100,7 @@ if (
         criticalDest = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${
             themesConfig[args.themeName].name
         }/${folders.CRITICAL_CSS_DEST}/`,
-        criticalAbsolutePath = `url(${folders.PUB_STATIC}/version${deployVersion}/${
+        criticalAbsolutePath = `url(${criticalConfig.url}${folders.PUB_STATIC}/version${deployVersion}/${
             themesConfig[args.themeName].area
         }/${themesConfig[args.themeName].name}/${themesConfig[args.themeName].locale}/`;
 

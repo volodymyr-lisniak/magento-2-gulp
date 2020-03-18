@@ -101,13 +101,29 @@ module.exports = {
 }
 ```
 
-To configure BrowserSync set hostnames in the `dev/tools/gulp/configs/bsConfig.js`
+Rename `dev/tools/gulp/configs/local.js.sample-aws` to `dev/tools/gulp/configs/local.js` and set your `hostname` to configure `BrowserSync` and `Critical CSS` urls.
 
 ```
 module.exports = {
-    proxy: 'http://hostname.loc/',
-    host: 'hostname.loc',
-    tunnel: 'hostname',
+    hostname: 'hostname'
+};
+```
+
+Example:
+
+```
+module.exports = {
+    hostname: 'capezio'
+};
+```
+
+If you need to configure `BrowserSync` use the `dev/tools/gulp/configs/bsConfig.js`
+
+```
+module.exports = {
+    proxy: `http://${localConfig.hostname}.loc/`,
+    host: `${localConfig.hostname}.loc`,
+    tunnel: `${localConfig.hostname}`,
     open: false
 };
 ```
@@ -116,19 +132,19 @@ Example:
 
 ```
 module.exports = {
-    proxy: 'http://capezio.loc/',
-    host: 'capezio.loc',
-    tunnel: 'capezio',
-    open: false
+    proxy: `http://${localConfig.hostname}.loc/`,
+    host: `${localConfig.hostname}.loc`,
+    tunnel: `${localConfig.hostname}`,
+    open: true
 };
 ```
 
-To configure critical CSS compilation set `url` and your desired screen size in the `dev/tools/gulp/configs/criticalConfig.js`
+To configure your desired screen size for the critical path use the `dev/tools/gulp/configs/criticalConfig.js`
 
 ```
 module.exports = {
     out: 'critical.css',
-    url: 'http://hostname.loc/',
+    url: `https://${localConfig.hostname}.loc/`,
     width: 1920,
     height: 900,
     forceExclude: [/\[data-role=main-css-loader]/]
@@ -140,9 +156,9 @@ Example:
 ```
 module.exports = {
     out: 'critical.css',
-    url: 'http://capezio.loc/',
+    url: `https://${localConfig.hostname}.loc/`,
     width: 1920,
-    height: 900,
+    height: 250,
     forceExclude: [/\[data-role=main-css-loader]/]
 };
 ```
@@ -191,7 +207,7 @@ Watch styles with `livereload` (`LiveReload` browser extension should be install
 gulp watch-styles --capezio --map --live
 ```
 Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`.
-In `production` mode should be run after `php bin/magento s:s:d` (task uses `pub/static/deployed_version.txt` to create relative path from the root of the site)
+In `production` mode should be run after `php bin/magento s:s:d` (task uses `pub/static/deployed_version.txt` to create absolute path to the static files)
 ```
 gulp critical --capezio
 ```

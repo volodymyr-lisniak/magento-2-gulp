@@ -8,11 +8,6 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const localConfig = require('./local');
-
 module.exports = {
-    proxy: `http://${localConfig.hostname}.loc/`,
-    host: `${localConfig.hostname}.loc`,
-    tunnel: `${localConfig.hostname}`,
-    open: false
+    hostname: 'hostname'
 };
