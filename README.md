@@ -115,7 +115,7 @@ Example:
 
 ```
 module.exports = {
-    hostname: 'capezio',,
+    hostname: 'capezio',
     generic: 'loc',
     useHttp2: true
 };
