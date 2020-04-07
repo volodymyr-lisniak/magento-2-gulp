@@ -8,14 +8,8 @@
  * @terms of use http://www.absolutewebservices.com/terms-of-use/
  */
 
-const localConfig = require('./local');
-
-const ptotocol = localConfig.useHttp2 ? 'https' : 'http';
-
 module.exports = {
-    out: 'critical.css',
-    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    width: 1920,
-    height: 900,
-    forceExclude: [/\[data-role=main-css-loader]/]
+    hostname: 'hostname',
+    generic: 'loc',
+    useHttp2: false
 };

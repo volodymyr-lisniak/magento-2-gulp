@@ -55,11 +55,21 @@ module.exports = {
         }
     },
 
+    fileNotFound: (file, path) => {
+        console.log(
+            color('[ERROR]', 'RED'),
+            color('File', 'WHITE'),
+            color(`${file}`, 'MAGENTA'),
+            color('not found in', 'WHITE'),
+            color(`${path}`, 'MAGENTA')
+        );
+    },
+
     help: () => {
         console.log(
             color('\nAWS Magento 2 Gulp', 'GREEN'),
             color('version', 'WHITE'),
-            color('1.4.0\n\n', 'YELLOW'),
+            color('1.4.1\n\n', 'YELLOW'),
             color('Usage:\n', 'YELLOW'),
             color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
             color('Avaliable commands:\n', 'YELLOW'),

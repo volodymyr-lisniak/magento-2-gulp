@@ -17,13 +17,29 @@ const devArgs = require('./constants/devArgs');
 const folders = require('./constants/folders');
 const matchTheme = require('./matchTheme');
 const themesConfig = require('../grunt/configs/local-themes');
+const loggers = require('./loggers');
 
 let cleanPaths = [];
 let criticalFiles = [];
 let deployPaths = [];
-let deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8');
 let execPaths = [];
 let sources = {};
+let deployVersion;
+
+try {
+    deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8')
+} catch (err) {
+    if (err.code === 'ENOENT') {
+        let file = 'deployed_version.txt';
+        let path = `${folders.PUB_STATIC}/`;
+
+        deployVersion = 'no-version';
+
+        loggers.fileNotFound(file, path);
+    } else {
+        throw err;
+    }
+}
 
 if (
     !args.themeName ||
@@ -43,7 +59,7 @@ if (
                 criticalDest = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${
                     themesConfig[i].name
                 }/${folders.CRITICAL_CSS_DEST}/`,
-                criticalAbsolutePath = `url(${folders.PUB_STATIC}/version${
+                criticalAbsolutePath = `url(${criticalConfig.url}${folders.PUB_STATIC}/version${
                     deployVersion}/${themesConfig[i].area
                 }/${themesConfig[i].name}/${themesConfig[i].locale}/`,
                 imgFiles = `${folders.THEME_FOLDER}/${themesConfig[i].area}/${themesConfig[i].name}`;
@@ -100,7 +116,7 @@ if (
         criticalDest = `${folders.THEME_FOLDER}/${themesConfig[args.themeName].area}/${
             themesConfig[args.themeName].name
         }/${folders.CRITICAL_CSS_DEST}/`,
-        criticalAbsolutePath = `url(${folders.PUB_STATIC}/version${deployVersion}/${
+        criticalAbsolutePath = `url(${criticalConfig.url}${folders.PUB_STATIC}/version${deployVersion}/${
             themesConfig[args.themeName].area
         }/${themesConfig[args.themeName].name}/${themesConfig[args.themeName].locale}/`;
 
