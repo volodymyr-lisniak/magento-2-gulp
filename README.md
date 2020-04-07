@@ -105,7 +105,9 @@ Rename `dev/tools/gulp/configs/local.js.sample-aws` to `dev/tools/gulp/configs/l
 
 ```
 module.exports = {
-    hostname: 'hostname'
+    hostname: 'hostname',
+    generic: 'loc',
+    useHttp2: false
 };
 ```
 
@@ -113,7 +115,9 @@ Example:
 
 ```
 module.exports = {
-    hostname: 'capezio'
+    hostname: 'capezio',,
+    generic: 'loc',
+    useHttp2: true
 };
 ```
 
@@ -121,8 +125,8 @@ If you need to configure `BrowserSync` use the `dev/tools/gulp/configs/bsConfig.
 
 ```
 module.exports = {
-    proxy: `http://${localConfig.hostname}.loc/`,
-    host: `${localConfig.hostname}.loc`,
+    proxy: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
+    host: `${localConfig.hostname}.${localConfig.generic}`,
     tunnel: `${localConfig.hostname}`,
     open: false
 };
@@ -132,8 +136,8 @@ Example:
 
 ```
 module.exports = {
-    proxy: `http://${localConfig.hostname}.loc/`,
-    host: `${localConfig.hostname}.loc`,
+    proxy: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
+    host: `${localConfig.hostname}.${localConfig.generic}`,
     tunnel: `${localConfig.hostname}`,
     open: true
 };
@@ -144,7 +148,7 @@ To configure your desired screen size for the critical path use the `dev/tools/g
 ```
 module.exports = {
     out: 'critical.css',
-    url: `https://${localConfig.hostname}.loc/`,
+    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
     width: 1920,
     height: 900,
     forceExclude: [/\[data-role=main-css-loader]/]
@@ -156,7 +160,7 @@ Example:
 ```
 module.exports = {
     out: 'critical.css',
-    url: `https://${localConfig.hostname}.loc/`,
+    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
     width: 1920,
     height: 250,
     forceExclude: [/\[data-role=main-css-loader]/]

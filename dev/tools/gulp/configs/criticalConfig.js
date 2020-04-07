@@ -10,10 +10,12 @@
 
 const localConfig = require('./local');
 
+const ptotocol = localConfig.useHttp2 ? 'https' : 'http';
+
 module.exports = {
     out: 'critical.css',
-    url: `https://${localConfig.hostname}.loc/`,
+    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
     width: 1920,
-    height: 250,
+    height: 900,
     forceExclude: [/\[data-role=main-css-loader]/]
 };

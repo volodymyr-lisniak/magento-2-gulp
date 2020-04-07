@@ -9,5 +9,7 @@
  */
 
 module.exports = {
-    hostname: 'hostname'
+    hostname: 'hostname',
+    generic: 'loc',
+    useHttp2: false
 };

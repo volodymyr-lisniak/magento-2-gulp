@@ -17,13 +17,29 @@ const devArgs = require('./constants/devArgs');
 const folders = require('./constants/folders');
 const matchTheme = require('./matchTheme');
 const themesConfig = require('../grunt/configs/local-themes');
+const loggers = require('./loggers');
 
 let cleanPaths = [];
 let criticalFiles = [];
 let deployPaths = [];
-let deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8');
 let execPaths = [];
 let sources = {};
+let deployVersion;
+
+try {
+    deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8')
+} catch (err) {
+    if (err.code === 'ENOENT') {
+        let file = 'deployed_version.txt';
+        let path = `${folders.PUB_STATIC}/`;
+
+        deployVersion = 'no-version';
+
+        loggers.fileNotFound(file, path);
+    } else {
+        throw err;
+    }
+}
 
 if (
     !args.themeName ||
