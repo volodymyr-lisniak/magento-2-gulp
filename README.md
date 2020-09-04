@@ -2,7 +2,7 @@
 
 ### Check for Node and NPM
 
-Make sure that you've installed Node and NPM before attempting to install gulp.
+Make sure that you've installed Node and NPM before attempting to install gulp (supports `gulp 3.x.x`).
 ```
 $ node -v
 ```
