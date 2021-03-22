@@ -1,13 +1,3 @@
-/**
- * Absolute Web Services Intellectual Property
- *
- * @category     {development/deployment}
- * @copyright    Copyright © 1999-2020 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
- * @author       Absolute Web Services
- * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
- * @terms of use http://www.absolutewebservices.com/terms-of-use/
- */
-
 const gulp = require('gulp');
 const livereload = require('gulp-livereload');
 const browserSync = require('browser-sync').create();
@@ -19,7 +9,7 @@ const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
 const paths = require('../paths');
 
-module.exports = () => {
+module.exports = async () => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else if (
@@ -40,13 +30,12 @@ module.exports = () => {
             if ({}.hasOwnProperty.call(paths.sources, source)) {
                 if (args.liveArg >= 0) {
                     livereload.listen();
+                    gulp.watch([`${paths.sources[source].watch}`], gulp.series('less'));
                 } else if (args.bsArg >= 0) {
+                    gulp.watch([`${paths.sources[source].watch}`], gulp.series('less'));
                     browserSync.init(bsConfig);
-
-                    browserSync.watch(`${paths.sources[source].css}*.css`).on('change', browserSync.reload);
+                    gulp.watch(`${paths.sources[source].css}/*.css`).on('change', browserSync.reload);
                 }
-
-                gulp.watch([`${paths.sources[source].watch}`], ['less']);
             }
         }
         /* eslint-enable max-depth */

@@ -6,7 +6,7 @@
     "homepage": "https://github.com/bobmotor/magento-2-gulp",
     "authors": [
         {
-            "name": "Absolute Web"
+            "name": "Volodymyr Lisniak <thebobmotor@gmail.com>"
         }
     ],
     "minimum-stability": "dev",
@@ -19,8 +19,8 @@
                 "gulpfile.js",
                 "gulpfile.js"
             ], [
-                "package.json.sample-aws",
-                "package.json.sample-aws"
+                "package.json.example",
+                "package.json.example"
             ], [
                 ".stylelintrc",
                 ".stylelintrc"
@@ -30,6 +30,9 @@
             ], [
                 ".babelrc",
                 ".babelrc"
+            ], [
+                ".gitignore.example",
+                ".gitignore.example"
             ]
         ]
     }

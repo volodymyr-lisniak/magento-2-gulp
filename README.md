@@ -2,7 +2,7 @@
 
 ### Check for Node and NPM
 
-Make sure that you've installed Node and NPM before attempting to install gulp (supports `gulp 3.x.x`).
+Make sure that you've installed Node and NPM before attempting to install gulp (supports `gulp 4.x.x`). For gulp 3.x.x use [~1.4.0](https://github.com/bobmotor/magento-2-gulp/releases/tag/v1.4.1) version.
 ```
 $ node -v
 ```
@@ -38,12 +38,16 @@ $ composer require --dev bobmotor/magento-2-gulp
 
 Rename the following files in your project root directory
 
-* `package.json.sample-aws` to `package.json`
+* `package.json.example` to `package.json`
 
 Install modules listed as dependencies in `package.json`
 
 ```
 $ npm install
+```
+or
+```
+$ yarn
 ```
 
 - ### Manually
@@ -53,12 +57,16 @@ Copy source files to your project root directory
 
 Rename the following files in your project root directory
 
-* `package.json.sample-aws` to `package.json`
+* `package.json.example` to `package.json`
 
 Install modules listed as dependencies in `package.json`
 
 ```
 $ npm install
+```
+or
+```
+$ yarn
 ```
 
 ## Configuration
@@ -89,7 +97,7 @@ module.exports = {
     ...
     capezio: {
         area: 'frontend',
-        name: 'Aws/capezio',
+        name: 'Package/themeName',
         locale: 'en_US',
         files: [
             'css/styles-m',
@@ -101,7 +109,7 @@ module.exports = {
 }
 ```
 
-Rename `dev/tools/gulp/configs/local.js.sample-aws` to `dev/tools/gulp/configs/local.js` and set your `hostname` to configure `BrowserSync` and `Critical CSS` urls.
+Open `dev/tools/gulp/configs/local.js` and set your `hostname` to configure `BrowserSync` and `Critical CSS` urls.
 
 ```
 module.exports = {
@@ -115,7 +123,7 @@ Example:
 
 ```
 module.exports = {
-    hostname: 'capezio',
+    hostname: 'localhost',
     generic: 'loc',
     useHttp2: true
 };
@@ -174,14 +182,12 @@ In project root dir run `gulp [command] --[theme] --[arguments]`
 Avaliable commands:
 
 ```
-cache-clean                     Clean Magento cache
+babel                           Compile ES6+ to ES5
 clean                           Remove cached files (pub/static/*, var/*)
 critical                        Compile critical css
 default, help                   Display this help message
-es6                             Compile ES6+ to ES5
 exec                            Republishes symlinks to the source files
 less                            Compile LESS to CSS
-svg                             Create svg sprite
 watch-scripts                   Watch for src/*.js files
 watch-styles                    Watch for *.less files
 ```
@@ -200,23 +206,22 @@ Examples:
 
 Removes the theme related static files in the `pub/static` and `var` directories, republishes symlinks to the source files to the `pub/static/frontend/ directory` and compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map and minification.
 ```
-gulp clean --capezio && gulp exec --capezio && gulp less --capezio --map --min
+gulp clean --themeName && gulp exec --themeName && gulp less --themeName --map --min
 ```
-Compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map.
+Compiles CSS files using the symlinks published in the `pub/static/frontend/` directory with source map.
 ```
-gulp less --capezio --map
+gulp less --themeName --map
 ```
 Watch styles with `livereload` (`LiveReload` browser extension should be installed)
 ```
-gulp watch-styles --capezio --map --live
+gulp watch-styles --themeName --map --live
 ```
 Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`.
 In `production` mode should be run after `php bin/magento s:s:d` (task uses `pub/static/deployed_version.txt` to create absolute path to the static files)
 ```
-gulp critical --capezio
+gulp critical --themeName
 ```
 
 Note:
 
 * ES6 files should be placed at `.../web/js/src/*.js`. Compiled files will be in the `.../web/js/*.js`
-* svg icons (`*.svg`) need to be uploaded to `app/design/frontend/<VandorName>/<ThemeName>/web/images/icons/`
