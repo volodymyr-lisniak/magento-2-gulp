@@ -1,13 +1,3 @@
-/**
- * Absolute Web Services Intellectual Property
- *
- * @category     {development/deployment}
- * @copyright    Copyright © 1999-2020 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
- * @author       Absolute Web Services
- * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
- * @terms of use http://www.absolutewebservices.com/terms-of-use/
- */
-
 const del = require('del');
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
@@ -20,7 +10,7 @@ const matchTheme = require('../matchTheme');
 const paths = require('../paths');
 const penthouse = require('../plugins/penthouse');
 
-module.exports = () => {
+module.exports = async () => {
     if (!matchTheme.matchTheme) {
         loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
     } else if (

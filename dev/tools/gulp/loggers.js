@@ -1,13 +1,3 @@
-/**
- * Absolute Web Services Intellectual Property
- *
- * @category     {development/deployment}
- * @copyright    Copyright © 1999-2020 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
- * @author       Absolute Web Services
- * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
- * @terms of use http://www.absolutewebservices.com/terms-of-use/
- */
-
 const color = require('gulp-color');
 
 module.exports = {
@@ -57,7 +47,7 @@ module.exports = {
 
     fileNotFound: (file, path) => {
         console.log(
-            color('[ERROR]', 'RED'),
+            color('[WARNING]', 'RED'),
             color('File', 'WHITE'),
             color(`${file}`, 'MAGENTA'),
             color('not found in', 'WHITE'),
@@ -67,32 +57,28 @@ module.exports = {
 
     help: () => {
         console.log(
-            color('\nAWS Magento 2 Gulp', 'GREEN'),
+            color('\nMagento 2 Gulp', 'GREEN'),
             color('version', 'WHITE'),
-            color('1.4.1\n\n', 'YELLOW'),
+            color('1.5.0\n\n', 'YELLOW'),
             color('Usage:\n', 'YELLOW'),
             color('  gulp [command] --[package] --[arguments]\n\n', 'WHITE'),
             color('Avaliable commands:\n', 'YELLOW'),
-            color('  cache-clean                    ', 'GREEN'),
-            color('Clean Magento cache\n', 'WHITE'),
+            color('  babel                          ', 'GREEN'),
+            color('Compile ES6+ to ES5\n', 'WHITE'),
             color('  clean                          ', 'GREEN'),
             color('Remove cached files (pub/static/*, var/*)\n', 'WHITE'),
             color('  critical                       ', 'GREEN'),
             color('Compile critical css\n', 'WHITE'),
             color('  default, help                  ', 'GREEN'),
             color('Display this help message\n', 'WHITE'),
-            color('  es6                            ', 'GREEN'),
-            color('Compile ES6+ to ES5\n', 'WHITE'),
             color('  exec                           ', 'GREEN'),
             color('Republishes symlinks to the source files\n', 'WHITE'),
             color('  less                           ', 'GREEN'),
             color('Compile LESS to CSS\n', 'WHITE'),
-            color('  svg                            ', 'GREEN'),
-            color('Create SVG sprite\n', 'WHITE'),
             color('  watch-scripts                  ', 'GREEN'),
-            color('Watch for theme files\n', 'WHITE'),
+            color('Watch for *.less files\n', 'WHITE'),
             color('  watch-styles                   ', 'GREEN'),
-            color('Watch for theme files\n\n', 'WHITE'),
+            color('Watch for src/*.js files\n\n', 'WHITE'),
             color('Options:\n', 'YELLOW'),
             color('  --[package]                    ', 'GREEN'),
             color('Package name (optional field). Need to be the first option. Ex.: --luma\n', 'WHITE'),

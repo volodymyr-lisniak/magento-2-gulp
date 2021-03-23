@@ -1,13 +1,3 @@
-/**
- * Absolute Web Services Intellectual Property
- *
- * @category     {development/deployment}
- * @copyright    Copyright © 1999-2020 Absolute Web Services, Inc. (http://www.absolutewebservices.com)
- * @author       Absolute Web Services
- * @license      http://www.absolutewebservices.com/license-agreement/  Single domain license
- * @terms of use http://www.absolutewebservices.com/terms-of-use/
- */
-
 const fs = require('fs');
 
 const args = require('./args');
@@ -27,7 +17,7 @@ let sources = {};
 let deployVersion;
 
 try {
-    deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8')
+    deployVersion = fs.readFileSync(`${folders.PUB_STATIC}/deployed_version.txt`, 'utf8');
 } catch (err) {
     if (err.code === 'ENOENT') {
         let file = 'deployed_version.txt';
@@ -77,12 +67,7 @@ if (
                 cssSrc: cssSrc,
                 criticalDest: criticalDest,
                 criticalAbsolutePath: criticalAbsolutePath,
-                watch: `${lessPath}/${folders.WATCH_FILES}`,
-                imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
-                imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
-                imagesSvgDest: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_DEST}`,
-                svgStyleFile: `${imgFiles}/${folders.IMAGE_SVG_STYLE_FILE}`,
-                svgSpriteFolder: `${imgFiles}/${folders.IMAGE_SVG_SPRITE_FOLDER}`
+                watch: `${lessPath}/${folders.WATCH_FILES}`
             };
 
             execPaths = [
@@ -138,12 +123,7 @@ if (
         cssSrc: cssSrc,
         criticalDest: criticalDest,
         criticalAbsolutePath: criticalAbsolutePath,
-        watch: `${lessPath}/${folders.WATCH_FILES}`,
-        imagesSvg: `${imgFiles}/${folders.IMAGE_SVG_FOLDER}`,
-        imagesSvgSrc: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_SRC}`,
-        imagesSvgDest: `${imgFiles}/${folders.IMAGE_SVG_FOLDER_DEST}`,
-        svgStyleFile: `${imgFiles}/${folders.IMAGE_SVG_STYLE_FILE}`,
-        svgSpriteFolder: `${imgFiles}/${folders.IMAGE_SVG_SPRITE_FOLDER}`
+        watch: `${lessPath}/${folders.WATCH_FILES}`
     };
 
     execPaths = [
