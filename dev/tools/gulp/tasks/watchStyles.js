@@ -4,6 +4,7 @@ const browserSync = require('browser-sync').create();
 
 const args = require('../args');
 const bsConfig = require('../configs/bsConfig');
+const localConfig = require('../configs/local');
 const devArgs = require('../constants/devArgs');
 const loggers = require('../loggers');
 const matchTheme = require('../matchTheme');
@@ -30,7 +31,11 @@ module.exports = async () => {
             if ({}.hasOwnProperty.call(paths.sources, source)) {
                 if (args.liveArg >= 0) {
                     livereload.listen();
-                    gulp.watch([`${paths.sources[source].watch}`], gulp.series('less'));
+                    gulp.watch(
+                        [`${paths.sources[source].watch}`],
+                        { usePolling: localConfig?.useInDocker },
+                        gulp.series('less')
+                    );
                 } else if (args.bsArg >= 0) {
                     gulp.watch([`${paths.sources[source].watch}`], gulp.series('less'));
                     browserSync.init(bsConfig);

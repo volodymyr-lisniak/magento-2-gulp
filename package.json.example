@@ -1,6 +1,6 @@
 {
     "name": "magento-2-gulp",
-    "version": "1.5.0",
+    "version": "1.5.2",
     "author": "Volodymyr Lisniak <thebobmotor@gmail.com>",
     "description": "Magento 2 node modules dependencies",
     "license": "MIT",

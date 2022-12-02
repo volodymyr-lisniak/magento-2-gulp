@@ -1,6 +1,6 @@
 const localConfig = require('./local');
 
-const ptotocol = localConfig.useHttp2 ? 'https' : 'http';
+const ptotocol = localConfig.useHttps ? 'https' : 'http';
 
 module.exports = {
     out: 'critical.css',
