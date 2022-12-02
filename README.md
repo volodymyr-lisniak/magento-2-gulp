@@ -1,29 +1,21 @@
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 
-# Getting Started
+## Getting Started
 
-### Check for Node and NPM
+This build supports gulp `4.x.x`.
+For gulp `3.x.x` use [~1.4.0](https://github.com/bobmotor/magento-2-gulp/tree/v1.4.1) version.
 
-Make sure that you've installed Node and NPM before attempting to install gulp (supports gulp `4.x.x`). For gulp `3.x.x` use [~1.4.0](https://github.com/bobmotor/magento-2-gulp/tree/v1.4.1) version.
-```
-$ node -v
-```
-```
-$ npm -v
-```
-### Install Gulp globally
+### Be sure that Node, NPM and Gulp are installed
 
-```
-$ npm install gulp -g
+```bash
+node -v && npm -v && gulp -v
 ```
 
 ## Project integration
 
-- ### Composer
-
 Add repository's path to the `composer.json`
 
-```
+```json
 "repositories": [
     {
         "type": "github",
@@ -34,8 +26,8 @@ Add repository's path to the `composer.json`
 
 Run
 
-```
-$ composer require --dev bobmotor/magento-2-gulp
+```bash
+composer require --dev bobmotor/magento-2-gulp
 ```
 
 Rename the following files in your project root directory
@@ -44,96 +36,34 @@ Rename the following files in your project root directory
 
 Install modules listed as dependencies in `package.json`
 
-```
-$ npm install
-```
-or
-```
-$ yarn
-```
-
-- ### Manually
-
-Copy source files to your project root directory
-
-
-Rename the following files in your project root directory
-
-* `package.json.example` to `package.json`
-
-Install modules listed as dependencies in `package.json`
-
-```
-$ npm install
+```bash
+npm install
 ```
 or
-```
-$ yarn
+```bash
+yarn
 ```
 
 ## Configuration
 
-Copy the contents of `themes.js` into `local-themes.js` and add your theme configuration in the `dev/tools/grunt/configs/` directory.
+Make sure that you configure `dev/tools/grunt/configs/local-themes.js` file ([adobe docs](https://developer.adobe.com/commerce/frontend-core/guide/tools/grunt/#configuration-file))
 
-```
-module.exports = {
-    ...
-    <Theme>: {
-        area: 'frontend|adminhtml',
-        name: '<Vendor>/<Theme>',
-        locale: locale,
-        files: [
-            'css/styles-m',
-            'css/styles-l',
-        ],
-        dsl: 'less'
-    }
-    ...
-}
-```
+Copy the contents of `local.js.example` into `local.js` in the `dev/tools/gulp/configs/` directory and setup Gulp configuration.
 
-Example:
-
-```
-module.exports = {
-    ...
-    themeName: {
-        area: 'frontend',
-        name: 'Package/themeName',
-        locale: 'en_US',
-        files: [
-            'css/styles-m',
-            'css/styles-l'
-        ],
-        dsl: 'less'
-    }
-    ...
-}
-```
-
-Open `dev/tools/gulp/configs/local.js` and set your `hostname` to configure `BrowserSync` and `Critical CSS` urls.
-
-```
+```javascript
 module.exports = {
     hostname: 'hostname',
     generic: 'loc',
-    useHttp2: false
+    useHttps: false,
+    useInDocker: false
 };
 ```
 
-Example:
+### Optionally
 
-```
-module.exports = {
-    hostname: 'localhost',
-    generic: 'loc',
-    useHttp2: true
-};
-```
+* If you need to configure `BrowserSync` use the `dev/tools/gulp/configs/bsConfig.js`
 
-If you need to configure `BrowserSync` use the `dev/tools/gulp/configs/bsConfig.js`
-
-```
+```javascript
 module.exports = {
     proxy: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
     host: `${localConfig.hostname}.${localConfig.generic}`,
@@ -142,42 +72,19 @@ module.exports = {
 };
 ```
 
-Example:
+* To configure your desired screen size for the critical path use the `dev/tools/gulp/configs/criticalConfig.js`
 
-```
-module.exports = {
-    proxy: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    host: `${localConfig.hostname}.${localConfig.generic}`,
-    tunnel: `${localConfig.hostname}`,
-    open: true
-};
-```
-
-To configure your desired screen size for the critical path use the `dev/tools/gulp/configs/criticalConfig.js`
-
-```
+```javascript
 module.exports = {
     out: 'critical.css',
     url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
     width: 1920,
-    height: 900,
+    height: 200,
     forceExclude: [/\[data-role=main-css-loader]/]
 };
 ```
 
-Example:
-
-```
-module.exports = {
-    out: 'critical.css',
-    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    width: 1920,
-    height: 250,
-    forceExclude: [/\[data-role=main-css-loader]/]
-};
-```
-
-### How to use
+## How to use
 
 In project root dir run `gulp [command] --[theme] --[arguments]`
 
@@ -207,20 +114,20 @@ Options:
 Examples:
 
 Removes the theme related static files in the `pub/static` and `var` directories, republishes symlinks to the source files to the `pub/static/frontend/ directory` and compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map and minification.
-```
+```bash
 gulp clean --luma && gulp exec --luma && gulp less --luma --map --min
 ```
 Compiles CSS files using the symlinks published in the `pub/static/frontend/` directory with source map.
-```
+```bash
 gulp less --luma --map
 ```
 Watch styles with `livereload` (`LiveReload` browser extension should be installed)
-```
+```bash
 gulp watch-styles --luma --live
 ```
 Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`.
 In `production` mode should be run after `php bin/magento s:s:d` (task uses `pub/static/deployed_version.txt` to create absolute path to the static files)
-```
+```bash
 gulp critical --luma
 ```
 
