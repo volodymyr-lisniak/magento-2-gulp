@@ -37,7 +37,7 @@ Rename the following files in your project root directory
 Install modules listed as dependencies in `package.json`
 
 ```bash
-npm install
+npm install && npm install gulp
 ```
 or
 ```bash
